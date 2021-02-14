@@ -26,7 +26,7 @@ import Dimension from 'another-dimension';
 
 ### Creating Dimensions
 
-#### *`Dimension(spec, [options])`*
+#### *`Dimension(spec[, options])`*
 
 Can be used with `new` as *constructor*, or without as a *factory function*.
 
@@ -36,7 +36,7 @@ let lengthA = new Dimension("12mm");   // Constructor syntax
 let lengthB = Dimension("12mm");       // Factory syntax
 ```
 
-**spec** can be a Number, a String, or an Object providing a `value` and optional `unit` entry.
+**`spec`** can be a Number, a String, or an Object providing a `value` and optional `unit` entry.
 
 ```javascript
 // String providing value + unit
@@ -49,8 +49,8 @@ let lengthB = Dimension({value: 12, unit: "mm"});
 let lengthC = Dimension(12);       
 ```
 
-**options** can be a String specifying the unit, or an object with some of the following entries:
-**defaultUnit** Unit to use if not specified, overrides global default unit.
+**`options`** can be a String specifying the unit, or an object with some of the following entries:
+**`options.defaultUnit`** Unit to use if not specified, overrides global default unit.
 
 ```javascript
 // specify value and unit separately
