@@ -113,35 +113,35 @@ The list of built-in units is deliberately kept short. New units can be added qu
 
 | Unit / Aliases | Description |
 | -------------- | ----------- |
-| km             | Kilometers  |
-| m              | Meters      |
-| cm             | Centimeters |
-| mm             | Millimeters |
-| µ / µm / um    | Micrometers |
+| **`km`**       | Kilometers  |
+| **`m`**        | Meters      |
+| **`cm`**       | Centimeters |
+| **`mm`**       | Millimeters |
+| **`µ`** / **`µm`** / **`um`** | Micrometers |
 
 #### Imperial Units
 
 | Unit / Aliases | Description |
 | -------------- | ----------- |
-| in             | Inches      |
-| thou           | Thousandths of an Inch |
+| **`in`**       | Inches      |
+| **`thou`**     | Thousandths of an Inch |
 
 #### Typesetting Units
 
 | Unit / Aliases | Description |
 | -------------- | ----------- |
-| pt             | Point       |
+| **`pt`**       | Point       |
 
 #### Screen Units
 
 | Unit / Aliases | Description |
 | -------------- | ----------- |
-| px             | Pixel       |
+| **`px`**       | Pixel       |
 
 #### Angular Units
 
 | Unit / Aliases | Description |
 | -------------- | ----------- |
-| deg / °        | Angular Degrees |
-| arcmin         | Arc Minutes |
-| arcsec         | Arc Seconds |
+| **`deg`** / **`°`** | Angular Degrees |
+| **`arcmin`**   | Arc Minutes |
+| **`arcsec`**   | Arc Seconds |
