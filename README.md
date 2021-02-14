@@ -36,7 +36,7 @@ let lengthA = new Dimension("12mm");   // Constructor syntax
 let lengthB = Dimension("12mm");       // Factory syntax
 ```
 
-**`spec`** can be a Number, a String, or an Object providing a `value` and optional `unit` entry.
+**`spec`** can be a Number, a String, or an Object providing a **`value`** and optional **`unit`** entry.
 
 ```javascript
 // String providing value + unit
@@ -50,6 +50,7 @@ let lengthC = Dimension(12);
 ```
 
 **`options`** can be a String specifying the unit, or an object with some of the following entries:
+
 **`options.defaultUnit`** Unit to use if not specified, overrides global default unit.
 
 ```javascript
@@ -106,29 +107,31 @@ console.log(dim + dim);  // 50.8
 
 ### Supported Units
 
+The list of built-in units is deliberately kept short. New units can be added quickly by providing conversion functions or factors (at minimum to an from the global base unit - mm) using **`Dimension.addConversion()`**
+
 #### Metric Units
 
-km: Kilometers
-m: Meters
-cm: Centimeters
-mm: Millimeters
-µ / µm / um: Micrometers
+| km | Kilometers |
+| m | Meters |
+| cm | Centimeters |
+| mm | Millimeters |
+| µ / µm / um | Micrometers |
 
 #### Imperial Units
 
-in: Inches
-thou: Thousandths of an Inch
+| in | Inches |
+| thou | Thousandths of an Inch |
 
 #### Typesetting Units
 
-pt: Point
+| pt | Point |
 
 #### Screen Units
 
-px: Pixel
+| px | Pixel |
 
 #### Angular Units
 
-deg / °: Angular Degrees
-arcmin: Arc Minutes
-arcsec: Arc Seconds
+| deg / ° | Angular Degrees |
+| arcmin | Arc Minutes |
+| arcsec | Arc Seconds |
