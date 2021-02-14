@@ -26,7 +26,7 @@ import Dimension from 'another-dimension';
 
 ### Creating Dimensions
 
-#### `Dimension(spec, options)`
+#### *`Dimension(spec, options)`*
 
 Can be used with `new` as constructor, or without as a factory function
 
