@@ -24,6 +24,7 @@ let conversions = {
     "in": 25.4,
     "thou": 0.0254,
     "pt": 25.4 / 72,
+    "pc": 25.4 / 6,
     "px": v => v * 25.4 / config.pixelDensity,
     "deg": v => Math.tan(v / 2 / 180 * Math.PI ) * 2 * config.viewingDistance,
     "arcmin": v => conversions.mm.deg(v/60),
@@ -37,6 +38,7 @@ let conversions = {
     "µ": 1 / 25400,
     "thou": 0.001,
     "pt": 1 / 72,
+    "pc": 1 / 6,
     "px": v => v / options.pixelDensity,
     "deg": v => conversions.mm.deg(v) / 25.4,
     "arcmin": v => conversions.mm.arcmin(v) / 25.4,
@@ -51,6 +53,7 @@ let conversions = {
     "in": v => v * config.pixelDensity,
     "thou": v => v * config.pixelDensity / 1000,
     "pt": v => v * config.pixelDensity / 72,
+    "pc": v => v * config.pixelDensity / 6,
     "deg": v => conversions.mm.deg(v) * config.pixelDensity / 25.4,
     "arcmin": v => conversions.mm.arcmin(v) * config.pixelDensity / 25.4,
     "arcsec": v => conversions.mm.arcsec(v) * config.pixelDensity / 25.4
