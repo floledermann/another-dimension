@@ -128,8 +128,72 @@ let dim = Dimension("1in");
 let dimMM = dim.toDimension("mm");  // Dimension with value: 25.4 and unit: "mm"
 ```
 
-
 ### Global Configuration
+
+#### `Dimension.configure(*options*)`
+
+Set global configuration options.
+
+`options` is an object containing global configuration options.
+
+| Option                  | Default | Description   |
+| ----------------------- | ------- | ------------- |
+| **`defaultUnit`**       | `"mm"`  | Default unit to use when creating Dimension instances. |
+| **`defaultOutputUnit`** | `null`  | Unit to convert to when a Dimension instance is used as a primitive value. `null` uses the object's specified unit (so no conversion takes place). |
+| **`anchorUnit`**        | `"mm"`  | Unit to try as intermediate unit when no direct conversion from source to target unit is available. |
+| **`pixelDensity`**      | `96`    | Pixel density (in pixels-per-inch) to use for converting pixel values. |
+| **`viewingDistance`**   | `600`   | Viewing distance (in mm) to use for converting angular dimensions. The default of 600mm is often used for "Desktop" settings, for mobile phones use 300-350mm. |
+| **`aliases`**           | see [Supported Units](#supported-units) | A key-value map of unit aliases, e.g. `{'"': 'in'}` to use the " symbol as an alias for inches. *Warning*: setting this here will overwrite the internal alias table. Use `Dimension.addAlias()` to add aliases to the internal alias table. |
+
+#### `Dimension.addConversion(*fromUnit*, *toUnit*, *factorOrFunction*)`
+
+Add a conversion, specified as a fixed conversion factor or a function.
+
+`fromUnit` String specifying the unit to convert from.
+
+`toUnit` String specifying the unit to convert to.
+
+`factorOrFunction` either a `Number`, specifying a fixed conversion factor, or a `function(value, config)` that will be called for each conversion with the following parameters:
+
+- `value` the value to convert.
+- `config` the global configuration object (see `[Dimension.configure()]()`).
+
+To introduce a new unit, you only need to supply a conversion to and from the `anchorUnit` (by default: `"mm"`).
+
+##### Example:
+
+```js
+// (these conversions are already built in and serve only for illustration purposes)
+
+// to convert from inch to mm, multiply with 25.4
+Dimension.addConversion("in", "mm", 25.4);
+
+// to convert from inches to pixels, multiply with config.pixelDensity
+Dimension.addConversion("in", "px", (v, config) => v * config.pixelDensity);
+```
+
+#### `Dimension.addAlias(*unit*, *alias*)`
+
+Add an alias (alternative name) for a unit. The aliases will be considered before any conversion. *Warning*: aliases are not looked up recursively, so each alias has to refer to a unit which is actually specified (i.e. for which conversions are either built in or have been specified using `Dimension.addConversion()`).
+
+`unit` A String specifying the base unit.
+
+`alias` A String or an Array of Strings, specifying alias name(s).
+
+##### Example:
+
+```js
+// " is not configured as an alias for inches by default, as it may be confused with arcseconds.
+
+// to use " as an alias for inches
+Dimension.addAlias("in", '"');
+
+let length = Dimension('12"');
+
+console.log(length.toString());
+// => 12in
+```
+
 
 ### Using Dimensions as primitives
 
