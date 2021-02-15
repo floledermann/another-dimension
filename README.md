@@ -105,43 +105,53 @@ Dimension.configure({
 console.log(dim + dim);  // 50.8
 ```
 
-### Supported Units
+## Supported Units
 
 The list of built-in units is deliberately kept short. New units can be added quickly by providing conversion functions or factors (at minimum to an from the global base unit - mm) using **`Dimension.addConversion()`**
 
-#### Metric Units
+### Metric Units
 
-| Unit / Aliases | Description |
-| -------------- | ----------- |
-| **`km`**       | Kilometers  |
-| **`m`**        | Meters      |
-| **`cm`**       | Centimeters |
-| **`mm`**       | Millimeters |
-| **`µ`** / **`µm`** / **`um`** | Micrometers |
+| Unit / Aliases | Description | mm   |
+| -------------- | ----------- | ---- |
+| **`km`**       | Kilometer   | 10^6 |
+| **`m`**        | Meter       | 10^3 |
+| **`cm`**       | Centimeter  | 10   |
+| **`mm`**       | Millimeter  | 1    |
+| **`µ`** / **`µm`** / **`um`** | Micrometer | 10^-3 |
 
-#### Imperial Units
+### Imperial Units
 
-| Unit / Aliases | Description |
-| -------------- | ----------- |
-| **`in`**       | Inches      |
-| **`thou`**     | Thousandths of an Inch |
+| Unit / Aliases | Description | mm   |
+| -------------- | ----------- | ---- |
+| **`in`**       | Inch        | 25.4 |
+| **`thou`**     | Thousandths of an Inch | 0.0254 |
 
-#### Typesetting Units
+### Typesetting Units
 
-| Unit / Aliases | Description |
-| -------------- | ----------- |
-| **`pt`**       | Point       |
+| Unit / Aliases | Description  | mm   |
+| -------------- | -----------  | ---- |
+| **`pc`**       | [(DTP) Pica](https://en.wikipedia.org/wiki/Pica_(typography)) (1/6in)  | ≈4.23 |
+| **`pt`**       | [(DTP) Point](https://en.wikipedia.org/wiki/Point_(typography)) (1/12pc) | ≈0.353 |
+| **`twip`**     | [Twip](https://en.wikipedia.org/wiki/Twip) (1/20pt, sometimes used as device-independent pixel equivalent) | ≈0.0176 |
 
-#### Screen Units
+### Screen Units
 
-| Unit / Aliases | Description |
-| -------------- | ----------- |
-| **`px`**       | Pixel       |
+| Unit / Aliases | Description    | mm   |
+| -------------- | -----------    | ---- |
+| **`px`**       | *Physical* Pixel | Varying, depending on `config.pixelDensity` (≈0.265mm @ 96dpi)|
 
-#### Angular Units
+### Angular Units
 
-| Unit / Aliases | Description |
-| -------------- | ----------- |
-| **`deg`** / **`°`** | Angular Degrees |
-| **`arcmin`**   | Arc Minutes |
-| **`arcsec`**   | Arc Seconds |
+| Unit / Aliases | Description | mm   |
+| -------------- | ----------- | ---- |
+| **`deg`** / **`°`** | Angular Degree | Varying, depending on `config.viewingDistance` (≈10.5mm @ 600mm) |
+| **`arcmin`**   | Arc Minute | Varying, depending on `config.viewingDistance` (≈0.175mm @ 600mm) |
+| **`arcsec`**   | Arc Second | Varying, depending on `config.viewingDistance` (≈0.003mm @ 600mm)|
+
+## Credits
+
+**`another-dimension`** was created by Florian Ledermann as part of the [stimsrv](https://github.com/floledermann/stimsrv) project.
+
+License: MIT License.
+ 
+*"I'll take your brains to another dimension – Pay close attention" — In memoriam Keith Flint / The Prodigy*
