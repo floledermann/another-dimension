@@ -1,0 +1,32 @@
+{
+  "name": "another-dimension",
+  "version": "0.0.1",
+  "description": "A lightweight library for converting units of length",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floledermann/another-dimension.git"
+  },
+  "keywords": [
+    "length",
+    "unit",
+    "units",
+    "conversion",
+    "convert",
+    "imperial",
+    "metric",
+    "pixels",
+    "vision",
+    "ppi",
+    "dpi"
+  ],
+  "author": "Florian Ledermann <florian.ledermann@tuwien.ac.at>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/floledermann/another-dimension/issues"
+  },
+  "homepage": "https://github.com/floledermann/another-dimension#readme"
+}
