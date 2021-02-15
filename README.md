@@ -11,6 +11,8 @@ Why did I create another unit conversion utility?
 
 **`another-dimension`** was created as part of the [stimsrv](https://github.com/floledermann/stimsrv) project to support the accurate specification of dimensions for screen-based psychological experiments.
 
+|| [**In a Nutshell**](#in-a-nutshell) || [**Installation & Import**](#intallation--import) || [**API Documentation**](#api-documentation) || [**Supported Units**](#supported-units) || [**Credits**](#credits) || 
+
 ## **`another-dimension`** in a Nutshell
 
 ```javascript
@@ -64,7 +66,7 @@ ES module import syntax:
 import Dimension from 'another-dimension';
 ```
 
-## Basic usage
+## API Documentation
 
 ### Creating Dimensions
 
