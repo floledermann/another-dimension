@@ -13,7 +13,7 @@ Why did I create another unit conversion utility?
 
 ----
 
-|| [**In a Nutshell**](#in-a-nutshell) || [**Installation & Import**](#intallation--import) || [**API Documentation**](#api-documentation) || [**Supported Units**](#supported-units) || [**Credits**](#credits) || 
+|| &nbsp; [**In a Nutshell**](#in-a-nutshell) &nbsp; || &nbsp; [**Installation & Import**](#intallation--import) &nbsp; || &nbsp; [**API Documentation**](#api-documentation) &nbsp; || &nbsp; [**Supported Units**](#supported-units) &nbsp; || &nbsp; [**Credits**](#credits) &nbsp; || 
 
 ----
 
