@@ -180,6 +180,12 @@ function Dimension(spec, options) {
   
   this.toString = function(targetUnit, digits) {
     
+    // if only a number is specified, use it as digits parameter
+    if (typeof targetUnit == "number" && digits === undefined) {
+      digits = targetUnit;
+      targetUnit = undefined;
+    }
+    
     let val = this.toFixed(digits, targetUnit);
     
     return val + targetUnit || this.unit;
