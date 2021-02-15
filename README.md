@@ -5,8 +5,8 @@
 Why did I create another unit conversion utility?
 
 - **Lightweight, only supporting length units**. If you are looking for general conversion of various units, consider [js-quantities](https://www.npmjs.com/package/js-quantities), [convert-units](https://www.npmjs.com/package/convert-units), [convert](https://www.npmjs.com/package/convert) or others.
-- **Support for [angular length units](https://en.wikipedia.org/wiki/Angular_distance) (degrees, arcminutes and arcseconds)** which involve trigonometric functions and configurable viewing distance for accurate conversion to absolute length units.
-- Global **configuration of *pixel density* and *viewing distance* for accurate conversion from/to screen pixels and angular length units**, as often needed for perceptual experiments and user studies.
+- **Support for [angular length units](https://en.wikipedia.org/wiki/Angular_distance) (degrees, arcminutes and arcseconds)** which involve trigonometric calculations in the conversion and depend on viewing distance.
+- Global **configuration of *pixel density* and *viewing distance* for accurate conversion from/to physical screen pixels and angular length units**, as often needed for accurate reproduction of perceptual experiments and user studies.
 
 **`another-dimension`** was created as part of the [stimsrv](https://github.com/floledermann/stimsrv) project to support the accurate specification of dimensions for screen-based psychological experiments.
 
@@ -15,20 +15,20 @@ Why did I create another unit conversion utility?
 ```javascript
 const Dimension = require('another-dimension');
 
-// configuration for screen-based output scenario
+// configuration for screen-based output scenario (if you need to deviate from the defaults)
 Dimension.configure({
   defaultOutputUnit: "px", // convert to pixels when value is used as Number
   defaultUnit: "px",       // default unit to use if no unit is specified
   pixelDensity: 96,        // pixel density of Google Pixel 2 smartphone, 
-                           //   to convert pixel sizes
+                           //   used to convert pixel sizes
   viewingDistance: 350     // 350mm viewing distance (typical for smartphone use),
-                                to convert angular measure
+                           //   used to convert angular measure
 });
 
 // create some dimensions
-let width = Dimension("10mm");        // 10 mm
-let height = Dimension(50, "arcmin"); // 50 arcmin
-let distance = Dimension(50);         // 50 pixels (as per defaultUnit specified above)
+let width    = Dimension("10mm");       // 10 mm
+let height   = Dimension(50, "arcmin"); // 50 arcmin
+let distance = Dimension(50);           // 50 pixels (as per defaultUnit specified above)
 
 // dimensions can be used in place of numeric primitives, 
 // and will implicitly be converted to pixels (as configured above)
