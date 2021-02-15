@@ -108,17 +108,7 @@ let lengthC = Dimension("12mm", {defaultUnit: "in"});  // => 12 mm
 
 ### Retrieving and converting Dimensions
 
-#### `dimensionInstance.toNumber(targetUnit)`
-
-Returns the dimension converted to targetUnit, as a Number.
-
-```javascript
-let dim = Dimension("1in");
-
-let mm = dim.toNumber("mm");  // 25.4
-```
-
-#### `dimensionInstance.toDimension(targetUnit)`
+#### *`dimensionInstance.toDimension(targetUnit)`*
 
 Returns a new Dimension instance, converted to the targetUnit.
 
@@ -128,9 +118,30 @@ let dim = Dimension("1in");
 let dimMM = dim.toDimension("mm");  // Dimension with value: 25.4 and unit: "mm"
 ```
 
+#### *`dimensionInstance.toNumber(targetUnit)`*
+
+Returns the dimension converted to targetUnit, as a Number. If targetUnit is not specified, return the unconverted value.
+
+```javascript
+let dim = Dimension("1in");
+
+let mm = dim.toNumber("mm");  // 25.4
+let inches = dim.toNumber();  // 1
+```
+
+#### *`dimensionInstance.toString([targetUnit], [digits])`*
+
+#### *`dimensionInstance.toFixed([digits[, targetUnit]])`*
+
+#### *`dimensionInstance.valueOf()`*
+
+Returns the numeric value of the dimension converted to the globally configured **`defaultOutputUnit`**, or the unconverted value if `defaultOutputUnit` has not been set.
+
+This method is called internally by the JavaScript interpreter when a Dimension object is used in place of a primitive value, and is provided for this purpose. It should generally rarely be called explicitly (use `dimensionInstance.toNumber()`, `dimensionInstance.toFixed()` or `dimensionInstance.toString()` for better control over the output instead).
+
 ### Global Configuration
 
-#### `Dimension.configure(options)`
+#### *`Dimension.configure(options)`*
 
 Set global configuration options.
 
@@ -145,7 +156,7 @@ Set global configuration options.
 | **`viewingDistance`**   | `600`   | Viewing distance (in mm) to use for converting angular dimensions. The default of 600mm is often used for "Desktop" settings, for mobile phones use 300-350mm. |
 | **`aliases`**           | see [Supported Units](#supported-units) | A key-value map of unit aliases, e.g. `{'"': 'in'}` to use the **"** character as an alias for inches. ***Warning:*** setting this here will overwrite the internal alias table. Use `Dimension.addAlias()` to add aliases to the internal alias table. |
 
-#### `Dimension.addConversion(fromUnit, toUnit, factorOrFunction)`
+#### *`Dimension.addConversion(fromUnit, toUnit, factorOrFunction)`*
 
 Add a conversion, specified as a fixed conversion factor or a function.
 
@@ -172,9 +183,9 @@ Dimension.addConversion("in", "mm", 25.4);
 Dimension.addConversion("in", "px", (v, config) => v * config.pixelDensity);
 ```
 
-#### `Dimension.addAlias(unit, alias)`
+#### *`Dimension.addAlias(unit, alias)`*
 
-Add an alias (alternative name) for a unit. The aliases will be considered before any conversion. *Warning*: aliases are not looked up recursively, so each alias has to refer to a unit which is actually specified (i.e. for which conversions are either built in or have been specified using [`Dimension.addConversion()`](#dimensionaddconversionfromunittounitfactororfunction)).
+Add an alias (alternative name) for a unit. The aliases will be considered before any conversion. *Warning*: aliases are not looked up recursively, so each alias has to refer to a unit which is actually specified (i.e. for which conversions are either built in or have been specified using [`Dimension.addConversion()`](#dimensionaddconversionfromunit-tounit-factororfunction)).
 
 **`unit`** A String specifying the base unit.
 
