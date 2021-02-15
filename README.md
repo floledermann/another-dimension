@@ -230,7 +230,7 @@ console.log(dim + dim);  // 50.8
 
 ## Supported Units
 
-The list of built-in units is deliberately kept short. New units can be added quickly by providing conversion functions or factors (at minimum to an from the global base unit `config.anchorUnit`) using [`Dimension.addConversion()`](#dimensionaddconversionfromunit-tounit-factororfunction)
+The list of built-in units is deliberately kept short. New units can be added quickly by providing conversion functions or factors (at minimum to and from the global base unit `config.anchorUnit`) using [`Dimension.addConversion()`](#dimensionaddconversionfromunit-tounit-factororfunction)
 
 ### Metric Units
 
@@ -273,7 +273,7 @@ The list of built-in units is deliberately kept short. New units can be added qu
 
 ## Credits
 
-**`another-dimension`** was created by Florian Ledermann as part of the [stimsrv](https://github.com/floledermann/stimsrv) project.
+**`another-dimension`** was created by Florian Ledermann ([Twitter](https://twitter.com/floledermann)) as part of the [stimsrv](https://github.com/floledermann/stimsrv) project.
 
 License: MIT License.
  
