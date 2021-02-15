@@ -19,7 +19,7 @@ const Dimension = require('another-dimension');
 Dimension.configure({
   defaultOutputUnit: "px", // convert to pixels when value is used as Number
   defaultUnit: "px",       // default unit to use if no unit is specified
-  pixelDensity: 96,        // pixel density of Google Pixel 2 smartphone, 
+  pixelDensity: 440,       // 440ppi, pixel density of HiDPI smartphone, 
                            //   used to convert pixel sizes
   viewingDistance: 350     // 350mm viewing distance (typical for smartphone use),
                            //   used to convert angular measure
@@ -32,12 +32,13 @@ let distance = Dimension(50);           // 50 pixels (as per defaultUnit specifi
 
 // dimensions can be used in place of numeric primitives, 
 // and will implicitly be converted to pixels (as configured above)
-// This will draw a 37.8 x 38.5 pixel rectangle!
+// This will draw a 173.2 x 176.4 pixel rectangle!
 canvasContext2D.fillRect(0, 0, width, height);
 
 // Dimension containing the length of the diagonal in pixels (set as defaultUnit above)
 let diagonal = Dimension(Math.sqrt(width ** 2 + height ** 2));
 
+// Ouptut diagonal length in mm, using 2 digits precision
 console.log(`Diagonal length: ${diagonal.toString("mm",2)}`);
 // => "Diagonal: 14.27mm"
 ```
