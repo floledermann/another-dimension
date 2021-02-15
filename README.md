@@ -2,6 +2,14 @@
 
 **another-dimension** helps to convert between various units of length, with a focus on units used for screen presentation (physical screen Pixels) and visual acuity experiments (arcminutes, arcseconds).
 
+Why did I create another unit conversion utility?
+
+- Lightweight, only supporting length units. If you are looking for general conversion of various units, consider [js-quantities](https://www.npmjs.com/package/js-quantities), [convert-units](https://www.npmjs.com/package/convert-units), [convert](https://www.npmjs.com/package/convert) or others.
+- Global configuration of *pixel density* and *viewing distance* for accurate conversion from/to screen pixels and angular length units, as often needed for perceptual experiments and user studies.
+- Support for [angular length units](https://en.wikipedia.org/wiki/Angular_distance) (degrees, arcminutes and arcseconds) which involve trigonometric functions and configurable viewing distance for accurate conversion to absolute length units.
+
+**`another-dimension`** was created as part of the [stimsrv](https://github.com/floledermann/stimsrv) project to support accurate specification of dimensions for psychophysical experiments.
+
 ## Installation & Import
 
 ### Node.js
@@ -154,4 +162,4 @@ The list of built-in units is deliberately kept short. New units can be added qu
 
 License: MIT License.
  
-*"I'll take your brains to another dimension – Pay close attention" — In memoriam Keith Flint / The Prodigy*
+*"I'll take your brains to another dimension ... pay close attention!" — In memoriam Keith Flint / The Prodigy*
