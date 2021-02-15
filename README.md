@@ -1,4 +1,4 @@
-# A lightweight library for converting between units of length
+# A lightweight library for converting units of length
 
 **`another-dimension`** helps to convert between various units of length, with a focus on units used for screen presentation (physical screen pixels) and visual acuity experiments (arcminutes, arcseconds).
 
@@ -6,6 +6,7 @@ Why did I create another unit conversion utility?
 
 - **Lightweight, only supporting length units**. If you are looking for general conversion of various units, consider [js-quantities](https://www.npmjs.com/package/js-quantities), [convert-units](https://www.npmjs.com/package/convert-units), [convert](https://www.npmjs.com/package/convert) or others.
 - **Support for [angular length units](https://en.wikipedia.org/wiki/Angular_distance) (degrees, arcminutes and arcseconds)** which involve trigonometric calculations in the conversion and depend on viewing distance.
+- **Support for physical screen pixels** taking into account the (configurable) pixel density.
 - Global **configuration of *pixel density* and *viewing distance* for accurate conversion from/to physical screen pixels and angular length units**, as often needed for accurate reproduction of perceptual experiments and user studies.
 
 **`another-dimension`** was created as part of the [stimsrv](https://github.com/floledermann/stimsrv) project to support the accurate specification of dimensions for screen-based psychological experiments.
@@ -15,7 +16,7 @@ Why did I create another unit conversion utility?
 ```javascript
 const Dimension = require('another-dimension');
 
-// configuration for screen-based output scenario (if you need to deviate from the defaults)
+// Configuration for screen-based output scenario (if you need to deviate from the defaults)
 Dimension.configure({
   defaultOutputUnit: "px", // convert to pixels when value is used as Number
   defaultUnit: "px",       // default unit to use if no unit is specified
@@ -25,12 +26,12 @@ Dimension.configure({
                            //   used to convert angular measure
 });
 
-// create some dimensions
-let width    = Dimension("10mm");       // 10 mm
-let height   = Dimension(50, "arcmin"); // 50 arcmin
-let distance = Dimension(50);           // 50 pixels (as per defaultUnit specified above)
+// Create some dimensions
+let width  = Dimension("10mm");       // 10 mm
+let height = Dimension(50, "arcmin"); // 50 arcmin
+let depth  = Dimension(50);           // 50 pixels (as per defaultUnit specified above)
 
-// dimensions can be used in place of numeric primitives, 
+// Dimension objects can be used in place of numeric primitives, 
 // and will implicitly be converted to pixels (as configured above)
 // This will draw a 173.2 x 176.4 pixel rectangle!
 canvasContext2D.fillRect(0, 0, width, height);
@@ -40,7 +41,7 @@ let diagonal = Dimension(Math.sqrt(width ** 2 + height ** 2));
 
 // Ouptut diagonal length in mm, using 2 digits precision
 console.log(`Diagonal length: ${diagonal.toString("mm",2)}`);
-// => "Diagonal: 14.27mm"
+// => "Diagonal length: 14.27mm"
 ```
 
 ## Installation & Import
@@ -177,9 +178,9 @@ The list of built-in units is deliberately kept short. New units can be added qu
 
 ### Screen Units
 
-| Unit / Aliases | Description    | mm   |
-| -------------- | -----------    | ---- |
-| **`px`**       | *Physical* Pixel | Varying, depending on `config.pixelDensity` (≈0.265mm @ 96dpi)|
+| Unit / Aliases | Description             | mm   |
+| -------------- | ----------------------- | ---- |
+| **`px`**       | *Physical* Screen Pixel | Varying, depending on `config.pixelDensity` (≈0.265mm @ 96dpi)|
 
 ### Angular Units
 
@@ -195,4 +196,4 @@ The list of built-in units is deliberately kept short. New units can be added qu
 
 License: MIT License.
  
-*"I'll take your brains to another dimension ... pay close attention!" — In memoriam Keith Flint / The Prodigy*
+*"I'll take your brains to **another dimension** ... pay close attention!" — In memoriam Keith Flint / The Prodigy*
