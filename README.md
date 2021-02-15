@@ -130,11 +130,11 @@ let dimMM = dim.toDimension("mm");  // Dimension with value: 25.4 and unit: "mm"
 
 ### Global Configuration
 
-#### `Dimension.configure(*options*)`
+#### `Dimension.configure(options)`
 
 Set global configuration options.
 
-`options` is an object containing global configuration options.
+**`options`** is an object containing global configuration options.
 
 | Option                  | Default | Description   |
 | ----------------------- | ------- | ------------- |
@@ -143,22 +143,22 @@ Set global configuration options.
 | **`anchorUnit`**        | `"mm"`  | Unit to try as intermediate unit when no direct conversion from source to target unit is available. |
 | **`pixelDensity`**      | `96`    | Pixel density (in pixels-per-inch) to use for converting pixel values. |
 | **`viewingDistance`**   | `600`   | Viewing distance (in mm) to use for converting angular dimensions. The default of 600mm is often used for "Desktop" settings, for mobile phones use 300-350mm. |
-| **`aliases`**           | see [Supported Units](#supported-units) | A key-value map of unit aliases, e.g. `{'"': 'in'}` to use the " symbol as an alias for inches. *Warning*: setting this here will overwrite the internal alias table. Use `Dimension.addAlias()` to add aliases to the internal alias table. |
+| **`aliases`**           | see [Supported Units](#supported-units) | A key-value map of unit aliases, e.g. `{'"': 'in'}` to use the **"** character as an alias for inches. ***Warning:*** setting this here will overwrite the internal alias table. Use `Dimension.addAlias()` to add aliases to the internal alias table. |
 
-#### `Dimension.addConversion(*fromUnit*, *toUnit*, *factorOrFunction*)`
+#### `Dimension.addConversion(fromUnit, toUnit, factorOrFunction)`
 
 Add a conversion, specified as a fixed conversion factor or a function.
 
-`fromUnit` String specifying the unit to convert from.
+**`fromUnit`** String specifying the unit to convert from.
 
-`toUnit` String specifying the unit to convert to.
+**`toUnit`** String specifying the unit to convert to.
 
-`factorOrFunction` either a `Number`, specifying a fixed conversion factor, or a `function(value, config)` that will be called for each conversion with the following parameters:
+**`factorOrFunction`** either a `Number`, specifying a fixed conversion factor, or a `function(value, config)` that will be called for each conversion with the following parameters:
 
 - `value` the value to convert.
-- `config` the global configuration object (see `[Dimension.configure()]()`).
+- `config` the global configuration object (see [`Dimension.configure()`](#dimensionconfigureoptions)).
 
-To introduce a new unit, you only need to supply a conversion to and from the `anchorUnit` (by default: `"mm"`).
+To introduce a new unit, you only need to supply a conversion to and from the *`anchorUnit`* (by default: `"mm"`) as a bare minimum.
 
 ##### Example:
 
@@ -172,13 +172,13 @@ Dimension.addConversion("in", "mm", 25.4);
 Dimension.addConversion("in", "px", (v, config) => v * config.pixelDensity);
 ```
 
-#### `Dimension.addAlias(*unit*, *alias*)`
+#### `Dimension.addAlias(unit, alias)`
 
-Add an alias (alternative name) for a unit. The aliases will be considered before any conversion. *Warning*: aliases are not looked up recursively, so each alias has to refer to a unit which is actually specified (i.e. for which conversions are either built in or have been specified using `Dimension.addConversion()`).
+Add an alias (alternative name) for a unit. The aliases will be considered before any conversion. *Warning*: aliases are not looked up recursively, so each alias has to refer to a unit which is actually specified (i.e. for which conversions are either built in or have been specified using [`Dimension.addConversion()`](#dimensionaddconversionfromunittounitfactororfunction)).
 
-`unit` A String specifying the base unit.
+**`unit`** A String specifying the base unit.
 
-`alias` A String or an Array of Strings, specifying alias name(s).
+**`alias`** A String or an Array of Strings, specifying alias name(s).
 
 ##### Example:
 
