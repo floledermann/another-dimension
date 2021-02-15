@@ -69,7 +69,7 @@ function Dimension(spec, options) {
     return spec;
   }
   
-  if (!this instanceof Dimension) {
+  if (!(this instanceof Dimension)) {
     // 
     return new Dimension(spec, options);
   }
@@ -84,8 +84,10 @@ function Dimension(spec, options) {
 
   
   if (typeof spec == "string") {
+    // TODO parse value + unit
+    spec = Dimension.parseUnit(spec);
   }
-  else if ("value" in spec)) {
+  else if (typeof spec == "object" && "value" in spec) {
     spec = {
       value: spec.value,
       unit: spec.unit || options?.defaultUnit || config.defaultUnit
@@ -107,6 +109,14 @@ function Dimension(spec, options) {
       return this.toNumber(config.defaultOutputUnit);
     }
     return this.value;
+  }
+  
+  this.toFixed = function(digits, targetUnit) {
+    let val = this.toNumber(targetUnit);
+    if (digits !== undefined && digits !== null) {
+      val = val.toFixed(digits);
+    }
+    return val;
   }
   
   this.toNumber = function(targetUnit) {
@@ -143,7 +153,7 @@ function Dimension(spec, options) {
 //  }
 
     // indirect conversion
-    let conversion = conversions.[config.anchorUnit]?.[this.unit];
+    conversion = conversions[config.anchorUnit]?.[this.unit];
     if (conversion) {
       let conversion2 = conversions[targetUnit]?.[config.anchorUnit];
       if (conversion2) {
@@ -168,14 +178,17 @@ function Dimension(spec, options) {
     return Dimension({value: this.toNumber(targetUnit), unit: targetUnit}, options);
   }
   
-  this.toString = function() {
-    return this.value + this.unit;
+  this.toString = function(targetUnit, digits) {
+    
+    let val = this.toFixed(digits, targetUnit);
+    
+    return val + targetUnit || this.unit;
   }
   
   return this;
 }
 
-Dimension.configure(options) {
+Dimension.configure = function(options) {
   /*
   Attention: if you configure aliases here, the internal aliases table will be replaced.
   Use Dimension.addAlias() to add alias names to the internal table.
@@ -186,7 +199,7 @@ Dimension.configure(options) {
   }
 }
 
-Dimension.addAlias(unit, alias) {
+Dimension.addAlias = function(unit, alias) {
   
   if (!Array.isArray(aliases)) {
     aliasesList[alias] = unit;
@@ -198,7 +211,7 @@ Dimension.addAlias(unit, alias) {
   }
 }
 
-Dimension.addConversion(fromUnit, toUnit, factorOrFunction) {
+Dimension.addConversion = function(fromUnit, toUnit, factorOrFunction) {
   if (!conversions[toUnit]) {
     conversions[toUnit] = {};
   }
@@ -207,11 +220,11 @@ Dimension.addConversion(fromUnit, toUnit, factorOrFunction) {
 
 
 
-Dimension.getConversionFunction(fromUnit, toUnit, options) {
+Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
 
   let _config;
   
-  if (options.freezeConfig) {
+  if (options?.freezeConfig) {
     _config = Object.assign({}, config);
   }
   else {
@@ -219,7 +232,7 @@ Dimension.getConversionFunction(fromUnit, toUnit, options) {
   }
 
   // direct conversion
-  let conversion = conversions[targetUnit]?.[this.unit];
+  let conversion = conversions[toUnit]?.[fromUnit];
   if (conversion) {
     if (typeof conversion == "function") {
       return value => conversion(value, _config)
@@ -229,7 +242,7 @@ Dimension.getConversionFunction(fromUnit, toUnit, options) {
   
   // reverse conversion
   // this is not accurate for angular measurements - maybe hide behind a flag?
-//  conversion = conversions[this.unit].?[targetUnit];
+//  conversion = conversions[fromUnit].?[toUnit];
 //  if (conversion) {
 //    if (typeof conversion == "function") {
 //      conversion = conversion(1, config);
@@ -238,8 +251,8 @@ Dimension.getConversionFunction(fromUnit, toUnit, options) {
 //  }
 
   // indirect conversion
-  conversion = conversions.mm?.[this.unit];
-  let conversion2 = conversions[targetUnit]?.mm;
+  conversion = conversions.mm?.[fromUnit];
+  let conversion2 = conversions[toUnit]?.mm;
   let func = null;
   
   if (conversion && conversion2) {
@@ -266,5 +279,28 @@ Dimension.getConversionFunction(fromUnit, toUnit, options) {
   
   return null;
 }
+
+Dimension.parseUnit = function(str) {
+  let unitRegEx = /^(?<value>-?[0-9]*\.?[0-9]+)\s?(?<unit>[a-z]+)$/;
+  let match = unitRegEx.exec(str);
+  if (match) {
+    return {
+      value: +match.groups.value,
+      unit: match.groups.unit
+    }
+  }
+  else if (config.defaultUnit) {
+    let numberRegEx = /^(?<value>-?[0-9]*\.?[0-9]+)$/;
+    let match = numberRegEx.exec(str);
+    if (match) {
+      return {
+        value: parseFloat(str),
+        unit: config.defaultUnit
+      }
+    }  
+  }
+  return null;
+}
+
 
 module.exports = Dimension;
