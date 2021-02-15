@@ -19,8 +19,10 @@ const Dimension = require('another-dimension');
 Dimension.configure({
   defaultOutputUnit: "px", // convert to pixels when value is used as Number
   defaultUnit: "px",       // default unit to use if no unit is specified
-  pixelDensity: 96,        // pixel density of Google Pixel 2 smartphone, to convert pixel sizes
-  viewingDistance: 350     // 350mm viewing distance (typical for smartphone use), to convert angular measure
+  pixelDensity: 96,        // pixel density of Google Pixel 2 smartphone, 
+                           //   to convert pixel sizes
+  viewingDistance: 350     // 350mm viewing distance (typical for smartphone use),
+                                to convert angular measure
 });
 
 // create some dimensions
