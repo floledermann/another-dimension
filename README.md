@@ -110,7 +110,7 @@ let lengthC = Dimension("12mm", {defaultUnit: "in"});  // => 12 mm
 
 #### *`dimensionInstance.toDimension(targetUnit)`*
 
-Returns a new Dimension instance, converted to the targetUnit.
+Returns a new Dimension instance, converted to the `targetUnit`.
 
 ```javascript
 let dim = Dimension("1in");
@@ -120,7 +120,7 @@ let dimMM = dim.toDimension("mm");  // Dimension with value: 25.4 and unit: "mm"
 
 #### *`dimensionInstance.toNumber(targetUnit)`*
 
-Returns the dimension converted to targetUnit, as a Number. If targetUnit is not specified, return the unconverted value.
+Returns the dimension converted to `targetUnit`, as a Number. If `targetUnit` is not specified, return the unconverted value.
 
 ```javascript
 let dim = Dimension("1in");
@@ -135,7 +135,7 @@ let inches = dim.toNumber();  // 1
 
 #### *`dimensionInstance.valueOf()`*
 
-Returns the numeric value of the dimension converted to the globally configured **`defaultOutputUnit`**, or the unconverted value if `defaultOutputUnit` has not been set.
+Returns the numeric value of the dimension converted to the globally configured `defaultOutputUnit`, or the unconverted value if `defaultOutputUnit` has not been set.
 
 This method is called internally by the JavaScript interpreter when a Dimension object is used in place of a primitive value, and is provided for this purpose. It should generally rarely be called explicitly (use `dimensionInstance.toNumber()`, `dimensionInstance.toFixed()` or `dimensionInstance.toString()` for better control over the output instead).
 
@@ -164,12 +164,12 @@ Add a conversion, specified as a fixed conversion factor or a function.
 
 **`toUnit`** String specifying the unit to convert to.
 
-**`factorOrFunction`** either a `Number`, specifying a fixed conversion factor, or a `function(value, config)` that will be called for each conversion with the following parameters:
+**`factorOrFunction`** either a Number, specifying a fixed conversion factor, or a Function that will be called for each conversion with the following parameters:
 
 - `value` the value to convert.
 - `config` the global configuration object (see [`Dimension.configure()`](#dimensionconfigureoptions)).
 
-To introduce a new unit, you only need to supply a conversion to and from the *`anchorUnit`* (by default: `"mm"`) as a bare minimum.
+To introduce a new unit, you only need to supply a conversion to and from the `anchorUnit` (by default: `"mm"`) as a bare minimum.
 
 ##### Example:
 
@@ -185,7 +185,7 @@ Dimension.addConversion("in", "px", (v, config) => v * config.pixelDensity);
 
 #### *`Dimension.addAlias(unit, alias)`*
 
-Add an alias (alternative name) for a unit. The aliases will be considered before any conversion. *Warning*: aliases are not looked up recursively, so each alias has to refer to a unit which is actually specified (i.e. for which conversions are either built in or have been specified using [`Dimension.addConversion()`](#dimensionaddconversionfromunit-tounit-factororfunction)).
+Add an alias (alternative name) for a unit. The aliases will be considered before any conversion. ***Warning:*** Aliases are not looked up recursively, so each alias has to refer to a unit which is actually specified (i.e. for which conversions are either built in or have been specified using [`Dimension.addConversion()`](#dimensionaddconversionfromunit-tounit-factororfunction)).
 
 **`unit`** A String specifying the base unit.
 
@@ -208,7 +208,7 @@ console.log(length.toString());
 
 ### Using Dimensions as primitives
 
-For Objects involved in numeric calculations, the JavaScript interpreter internally calls `.valueOf()` on the Object before performing the operation. By default, valueOf() of Dimension instances returns their (unconverted) numerical value. If the global option `defaultOutputUnit` is set, the value is converted to the specified unit first.
+For Objects involved in numeric calculations, the JavaScript interpreter internally calls `.valueOf()` on the Object before performing the operation. By default, `valueOf()` of Dimension instances returns their (unconverted) numerical value. If the global option `defaultOutputUnit` is set, the value is converted to the specified unit first.
 
 ```javascript
 let dim = Dimension("1in");
@@ -224,7 +224,7 @@ console.log(dim + dim);  // 50.8
 
 ## Supported Units
 
-The list of built-in units is deliberately kept short. New units can be added quickly by providing conversion functions or factors (at minimum to an from the global base unit - mm) using **`Dimension.addConversion()`**
+The list of built-in units is deliberately kept short. New units can be added quickly by providing conversion functions or factors (at minimum to an from the global base unit `config.anchorUnit`) using [`Dimension.addConversion()`](#dimensionaddconversionfromunit-tounit-factororfunction)
 
 ### Metric Units
 
@@ -249,7 +249,7 @@ The list of built-in units is deliberately kept short. New units can be added qu
 | -------------- | -----------  | ---- |
 | **`pc`**       | [(DTP) Pica](https://en.wikipedia.org/wiki/Pica_(typography)) (1/6in)  | ≈4.23 |
 | **`pt`**       | [(DTP) Point](https://en.wikipedia.org/wiki/Point_(typography)) (1/12pc) | ≈0.353 |
-| **`twip`**     | [Twip](https://en.wikipedia.org/wiki/Twip) (1/20pt, sometimes used as device-independent pixel equivalent) | ≈0.0176 |
+| **`twip`**     | [Twip](https://en.wikipedia.org/wiki/Twip) (1/20pt) | ≈0.0176 |
 
 ### Screen Units
 
