@@ -182,6 +182,26 @@ This method is called internally by the JavaScript interpreter when a Dimension 
 *********************************************************************
 
 
+### Using Dimensions as primitives
+
+For Objects involved in numeric calculations, the JavaScript interpreter internally calls `.valueOf()` on the Object before performing the operation. By default, `valueOf()` of Dimension instances returns their (unconverted) numerical value. If the global option `defaultOutputUnit` is set, the value is converted to the specified unit first.
+
+```javascript
+let dim = Dimension("1in");
+
+console.log(dim + dim);  // 2
+
+Dimension.configure({
+  defaultOutputUnit: "mm"
+});
+
+console.log(dim + dim);  // 50.8
+```
+
+
+*********************************************************************
+
+
 ### Global Configuration
 
 #### *`Dimension.configure(options)`*
@@ -202,7 +222,7 @@ Set global configuration options.
 
 Default **`config.dimensionRegEx`**: `/^\s*(?<value>-?[0-9]*\.?[0-9]+)\s*(?<unit>[^\s\d]+)\s*$/`
 
-(This allows for padding whitespace, whitespace seperating value and unit, and special characters (but no digits) in the unit specifier.)
+(This allows for padding whitespace, whitespace separating value and unit, and special characters (but no digits) in the unit specifier.)
 
 
 *********************************************************************
@@ -265,21 +285,21 @@ console.log(length.toString());
 *********************************************************************
 
 
-### Using Dimensions as primitives
+### Global Helpers
 
-For Objects involved in numeric calculations, the JavaScript interpreter internally calls `.valueOf()` on the Object before performing the operation. By default, `valueOf()` of Dimension instances returns their (unconverted) numerical value. If the global option `defaultOutputUnit` is set, the value is converted to the specified unit first.
+#### *`Dimension.getConversionFunction(fromUnit, toUnit, options)`*
 
-```javascript
-let dim = Dimension("1in");
 
-console.log(dim + dim);  // 2
+*********************************************************************
 
-Dimension.configure({
-  defaultOutputUnit: "mm"
-});
 
-console.log(dim + dim);  // 50.8
-```
+#### *`Dimension.unAlias(unit)`*
+
+
+*********************************************************************
+
+
+#### *`Dimension.parseUnit(dimensionString)`*
 
 
 *********************************************************************
