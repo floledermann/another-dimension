@@ -123,53 +123,9 @@ function Dimension(spec, options) {
     // no unit specified -> return value
     if (!targetUnit) return this.value;
     
-    // check aliases
-    let alias = config.aliases[targetUnit];
-    if (alias) targetUnit = alias;
+    let func = Dimension.getConversionFunction(this.unit, targetUnit);
     
-    // same unit as own -> return value
-    if (targetUnit == this.unit) return this.value;
-    
-    let conv = Dimension.getConversionFunction(this.unit, targetUnit);
-
-    // Don't use Dimension.getConversionFunction to avoid closure overhead
-    // direct conversion
-    let conversion = conversions[targetUnit]?.[this.unit];
-    if (conversion) {
-      if (typeof conversion == "function") {
-        return conversion(this.value, config);
-      }
-      return this.value * conversion;
-    }
-    
-    // reverse conversion
-    // this is not accurate for angular measurements - maybe hide behind a flag?
-//  conversion = conversions[this.unit].?[targetUnit];
-//  if (conversion) {
-//    if (typeof conversion == "function") {
-//      conversion = conversion(1, config);
-//    }
-//    return this.value / conversion;
-//  }
-
-    // indirect conversion
-    conversion = conversions[config.anchorUnit]?.[this.unit];
-    if (conversion) {
-      let conversion2 = conversions[targetUnit]?.[config.anchorUnit];
-      if (conversion2) {
-        let valInAnchorUnit;
-        if (typeof conversion == "function") {
-          valInAnchorUnit = conversion(this.value, config);
-        }
-        else {
-          valInAnchorUnit = this.value * conversion;
-        }
-        if (typeof conversion2 == "function") {
-          return conversion2(valInAnchorUnit, config);
-        }
-        return valInAnchorUnit * conversion2;
-      }
-    }
+    if (func) return func(this.value);
     
     throw "No conversion path from " + this.unit + " to " + targetUnit + " found!";
   }
@@ -205,6 +161,10 @@ Dimension.configure = function(options) {
   }
 }
 
+Dimension.unAlias = function(unit) {
+  return config.aliases[unit] || unit;
+}
+
 Dimension.addAlias = function(unit, alias) {
   
   if (!Array.isArray(aliases)) {
@@ -236,6 +196,14 @@ Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
   else {
     _config = config;
   }
+  
+  fromUnit = Dimension.unAlias(fromUnit);
+  toUnit = Dimension.unAlias(toUnit);
+  
+  if (fromUnit == toUnit) {
+    // no conversion - return unity function
+    return x => x;
+  }
 
   // direct conversion
   let conversion = conversions[toUnit]?.[fromUnit];
@@ -247,14 +215,11 @@ Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
   }
   
   // reverse conversion
-  // this is not accurate for angular measurements - maybe hide behind a flag?
-//  conversion = conversions[fromUnit].?[toUnit];
-//  if (conversion) {
-//    if (typeof conversion == "function") {
-//      conversion = conversion(1, config);
-//    }
-//    return this.value / conversion;
-//  }
+  // can only be done for numeric factors
+  conversion = conversions[fromUnit]?.[toUnit];
+  if (conversion && typeof conversion == "number") {
+    return value => value / conversion;
+  }
 
   // indirect conversion
   conversion = conversions.mm?.[fromUnit];
