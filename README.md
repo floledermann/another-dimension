@@ -1,35 +1,39 @@
 # A lightweight library for converting units of length
 
-**`another-dimension`** helps to convert between various units of length, with a focus on units used for screen presentation (physical screen pixels) and visual acuity experiments (arcminutes, arcseconds).
+**`another-dimension`** helps to convert between various units of length, with a focus on units used for screen presentation (physical screen pixels) and visual perception experiments (arcminutes, arcseconds).
 
-Why did I create another unit conversion utility?
+Why another unit conversion library?
 
 - **Lightweight, only supporting length units**. If you are looking for general conversion of various units, consider [js-quantities](https://www.npmjs.com/package/js-quantities), [convert-units](https://www.npmjs.com/package/convert-units), [convert](https://www.npmjs.com/package/convert) or others.
-- **Support for [angular length units](https://en.wikipedia.org/wiki/Angular_distance) (degrees, arcminutes and arcseconds)** which involve trigonometric calculations in the conversion and depend on viewing distance.
+- **Support for [angular dimensions](https://en.wikipedia.org/wiki/Angular_distance) (degrees, arcminutes and arcseconds)** which involve trigonometric calculations in the conversion and depend on viewing distance.
 - **Support for physical screen pixels** taking into account the (configurable) pixel density.
 - Global **configuration of *pixel density* and *viewing distance* for accurate conversion from/to physical screen pixels and angular length units**, as often needed for accurate reproduction of perceptual experiments and user studies.
 
 **`another-dimension`** was created as part of the [stimsrv](https://github.com/floledermann/stimsrv) project to support the accurate specification of dimensions for screen-based psychological experiments.
 
-----
+
+*********************************************************************
+
 
 |&nbsp;—&nbsp;[**In&nbsp;a&nbsp;Nutshell**](#in-a-nutshell)&nbsp;— |&nbsp;—&nbsp;[**Installation&nbsp;&amp;&nbsp;Import**](#intallation--import)&nbsp;— |&nbsp;—&nbsp;[**API&nbsp;Documentation**](#api-documentation)&nbsp;— |&nbsp;—&nbsp;[**Supported&nbsp;Units**](#supported-units)&nbsp;— |&nbsp;—&nbsp;[**Credits**](#credits)&nbsp;—&nbsp;|
 
-----
+
+*********************************************************************
+
 
 ## **`another-dimension`** in a Nutshell
 
 ```javascript
 const Dimension = require('another-dimension');
 
-// Configuration for screen-based output scenario (if you need to deviate from the defaults)
+// Optional: Configuration of global settings
 Dimension.configure({
   defaultOutputUnit: "px", // convert to pixels when value is used as Number
   defaultUnit: "px",       // default unit to use if no unit is specified
-  pixelDensity: 440,       // 440ppi, pixel density of HiDPI smartphone, 
-                           //   used to convert pixel sizes
+  pixelDensity: 440,       // 440ppi, pixel density of HiDPI smartphone 
+                           //   (used to convert pixel sizes)
   viewingDistance: 350     // 350mm viewing distance (typical for smartphone use),
-                           //   used to convert angular measure
+                           //   (used to convert angular dimensions)
 });
 
 // Create some dimensions
@@ -38,7 +42,7 @@ let height = Dimension(50, "arcmin"); // 50 arcmin
 let depth  = Dimension(50);           // 50 pixels (as per defaultUnit specified above)
 
 // Dimension objects can be used in place of numeric primitives, 
-// and will implicitly be converted to pixels (as configured above)
+// and will implicitly be converted to pixels (as configured above per defaultOutputUnit)
 // This will draw a 173.2 x 176.4 pixel rectangle!
 canvasContext2D.fillRect(0, 0, width, height);
 
@@ -49,6 +53,10 @@ let diagonal = Dimension(Math.sqrt(width ** 2 + height ** 2));
 console.log(`Diagonal length: ${diagonal.toString("mm",2)}`);
 // => "Diagonal length: 14.27mm"
 ```
+
+
+*********************************************************************
+
 
 ## Installation & Import
 
@@ -69,6 +77,10 @@ ES module import syntax:
 ```javascript
 import Dimension from 'another-dimension';
 ```
+
+
+*********************************************************************
+
 
 ## API Documentation
 
@@ -112,6 +124,10 @@ let lengthB = Dimension(12, {defaultUnit: "in"});  // => 12 inches
 let lengthC = Dimension("12mm", {defaultUnit: "in"});  // => 12 mm    
 ```
 
+
+*********************************************************************
+
+
 ### Retrieving and converting Dimensions
 
 #### *`dimensionInstance.toDimension(targetUnit)`*
@@ -124,6 +140,10 @@ let dim = Dimension("1in");
 let dimMM = dim.toDimension("mm");  // Dimension with value: 25.4 and unit: "mm"
 ```
 
+
+*********************************************************************
+
+
 #### *`dimensionInstance.toNumber(targetUnit)`*
 
 Returns the dimension converted to `targetUnit`, as a Number. If `targetUnit` is not specified, return the unconverted value.
@@ -135,15 +155,31 @@ let mm = dim.toNumber("mm");  // 25.4
 let inches = dim.toNumber();  // 1
 ```
 
+
+*********************************************************************
+
+
 #### *`dimensionInstance.toString([targetUnit], [digits])`*
 
+
+*********************************************************************
+
+
 #### *`dimensionInstance.toFixed([digits[, targetUnit]])`*
+
+
+*********************************************************************
+
 
 #### *`dimensionInstance.valueOf()`*
 
 Returns the numeric value of the dimension converted to the globally configured `defaultOutputUnit`, or the unconverted value if `defaultOutputUnit` has not been set.
 
 This method is called internally by the JavaScript interpreter when a Dimension object is used in place of a primitive value, and is provided for this purpose. It should generally rarely be called explicitly (use `dimensionInstance.toNumber()`, `dimensionInstance.toFixed()` or `dimensionInstance.toString()` for better control over the output instead).
+
+
+*********************************************************************
+
 
 ### Global Configuration
 
@@ -161,6 +197,10 @@ Set global configuration options.
 | **`pixelDensity`**      | `96`    | Pixel density (in pixels-per-inch) to use for converting pixel values. |
 | **`viewingDistance`**   | `600`   | Viewing distance (in mm) to use for converting angular dimensions. The default of 600mm is often used for "Desktop" settings, for mobile phones use 300-350mm. |
 | **`aliases`**           | see [Supported Units](#supported-units) | A key-value map of unit aliases, e.g. `{'"': 'in'}` to use the **"** character as an alias for inches. ***Warning:*** setting this here will overwrite the internal alias table. Use `Dimension.addAlias()` to add aliases to the internal alias table. |
+
+
+*********************************************************************
+
 
 #### *`Dimension.addConversion(fromUnit, toUnit, factorOrFunction)`*
 
@@ -189,6 +229,10 @@ Dimension.addConversion("in", "mm", 25.4);
 Dimension.addConversion("in", "px", (v, config) => v * config.pixelDensity);
 ```
 
+
+*********************************************************************
+
+
 #### *`Dimension.addAlias(unit, alias)`*
 
 Add an alias (alternative name) for a unit. The aliases will be considered before any conversion. ***Warning:*** Aliases are not looked up recursively, so each alias has to refer to a unit which is actually specified (i.e. for which conversions are either built in or have been specified using [`Dimension.addConversion()`](#dimensionaddconversionfromunit-tounit-factororfunction)).
@@ -212,6 +256,9 @@ console.log(length.toString());
 ```
 
 
+*********************************************************************
+
+
 ### Using Dimensions as primitives
 
 For Objects involved in numeric calculations, the JavaScript interpreter internally calls `.valueOf()` on the Object before performing the operation. By default, `valueOf()` of Dimension instances returns their (unconverted) numerical value. If the global option `defaultOutputUnit` is set, the value is converted to the specified unit first.
@@ -227,6 +274,10 @@ Dimension.configure({
 
 console.log(dim + dim);  // 50.8
 ```
+
+
+*********************************************************************
+
 
 ## Supported Units
 
@@ -270,6 +321,10 @@ The list of built-in units is deliberately kept short. New units can be added qu
 | **`deg`** / **`°`** | Angular Degree | Varying, depending on `config.viewingDistance` (≈10.5mm @ 600mm) |
 | **`arcmin`**   | Arc Minute | Varying, depending on `config.viewingDistance` (≈0.175mm @ 600mm) |
 | **`arcsec`**   | Arc Second | Varying, depending on `config.viewingDistance` (≈0.003mm @ 600mm)|
+
+
+*********************************************************************
+
 
 ## Credits
 
