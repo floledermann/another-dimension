@@ -8,6 +8,7 @@ Why another unit conversion library?
 - **Support for [angular dimensions](https://en.wikipedia.org/wiki/Angular_distance) (degrees, arcminutes and arcseconds)** which involve trigonometric calculations in the conversion and depend on viewing distance.
 - **Support for physical screen pixels** taking into account the (configurable) pixel density.
 - Global **configuration of *pixel density* and *viewing distance* for accurate conversion from/to physical screen pixels and angular length units**, as often needed for accurate reproduction of perceptual experiments and user studies.
+- **Modern-style, function-based, highly configurable** implementation.
 
 **`another-dimension`** was created as part of the [stimsrv](https://github.com/floledermann/stimsrv) project to support the accurate specification of dimensions for screen-based psychological experiments.
 
@@ -199,7 +200,9 @@ Set global configuration options.
 | **`aliases`**           | see [Supported Units](#supported-units) | A key-value map of unit aliases, e.g. `{'"': 'in'}` to use the **"** character as an alias for inches. ***Warning:*** setting this here will overwrite the internal alias table. Use `Dimension.addAlias()` to add aliases to the internal alias table. |
 | **`dimensionRegEx`**    | see below | The regular expression used to parse dimension Strings. Has to define two named groups `value` and `unit`, which will be used to extract the numeric value and unit specifier from the String. |
 
-Default `config.dimensionRegEx`: `/^(?<value>-?[0-9]*\.?[0-9]+)\s?(?<unit>\D+)$/`
+Default **`config.dimensionRegEx`**: `/^\s*(?<value>-?[0-9]*\.?[0-9]+)\s*(?<unit>[^\s\d]+)\s*$/`
+
+(This allows for padding whitespace, whitespace seperating value and unit, and special characters (but no digits) in the unit specifier.)
 
 
 *********************************************************************
