@@ -197,6 +197,9 @@ Set global configuration options.
 | **`pixelDensity`**      | `96`    | Pixel density (in pixels-per-inch) to use for converting pixel values. |
 | **`viewingDistance`**   | `600`   | Viewing distance (in mm) to use for converting angular dimensions. The default of 600mm is often used for "Desktop" settings, for mobile phones use 300-350mm. |
 | **`aliases`**           | see [Supported Units](#supported-units) | A key-value map of unit aliases, e.g. `{'"': 'in'}` to use the **"** character as an alias for inches. ***Warning:*** setting this here will overwrite the internal alias table. Use `Dimension.addAlias()` to add aliases to the internal alias table. |
+| **`dimensionRegEx`**    | see below | The regular expression used to parse dimension Strings. Has to define two named groups `value` and `unit`, which will be used to extract the numeric value and unit specifier from the String. |
+
+Default `config.dimensionRegEx`: `/^(?<value>-?[0-9]*\.?[0-9]+)\s?(?<unit>\D+)$/`
 
 
 *********************************************************************

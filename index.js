@@ -10,7 +10,8 @@ let config = {
     "um": "µ",
     "µm": "µ",
     "°": "deg"
-  }
+  },
+  dimensionRegEx: /^(?<value>-?[0-9]*\.?[0-9]+)\s?(?<unit>\D+)$/
 };
 
 
@@ -84,7 +85,6 @@ function Dimension(spec, options) {
 
   
   if (typeof spec == "string") {
-    // TODO parse value + unit
     spec = Dimension.parseUnit(spec);
   }
   else if (typeof spec == "object" && "value" in spec) {
@@ -287,8 +287,8 @@ Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
 }
 
 Dimension.parseUnit = function(str) {
-  let unitRegEx = /^(?<value>-?[0-9]*\.?[0-9]+)\s?(?<unit>[a-z]+)$/;
-  let match = unitRegEx.exec(str);
+  
+  let match = config.dimensionRegEx.exec(str);
   if (match) {
     return {
       value: +match.groups.value,
