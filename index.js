@@ -11,7 +11,7 @@ let config = {
     "µm": "µ",
     "°": "deg"
   },
-  dimensionRegEx: /^(?<value>-?[0-9]*\.?[0-9]+)\s?(?<unit>\D+)$/
+  dimensionRegEx: /^\s*(?<value>-?[0-9]*\.?[0-9]+)\s*(?<unit>[^\s\d]+)\s*$/
 };
 
 
