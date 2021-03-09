@@ -173,7 +173,9 @@ Dimension.configure = function(options) {
 }
 
 Dimension.unAlias = function(unit) {
+  
   return config.aliases[unit] || unit;
+  
 }
 
 Dimension.addAlias = function(unit, alias) {
@@ -183,13 +185,13 @@ Dimension.addAlias = function(unit, alias) {
 }
 
 Dimension.addConversion = function(fromUnit, toUnit, factorOrFunction) {
+  
   if (!conversions[toUnit]) {
     conversions[toUnit] = {};
   }
   conversions[toUnit][fromUnit] = factorOrFunction;
+  
 }
-
-
 
 Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
 
