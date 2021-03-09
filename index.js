@@ -101,7 +101,7 @@ function Dimension(spec, options) {
   else {
     // Number or Object
     spec = {
-      value: +spec.valueOf(),
+      value: +spec?.valueOf(),
       unit: options?.defaultUnit || config.defaultUnit
     }
   }
