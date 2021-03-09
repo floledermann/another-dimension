@@ -11,6 +11,7 @@ let config = {
     "µm": "µ",
     "°": "deg"
   },
+  toJSON: d => ({value: d.value, unit: d.unit}),
   dimensionRegEx: /^\s*(?<value>-?[0-9]*\.?[0-9]+)\s*(?<unit>[^\s\d]+)\s*$/
 };
 
@@ -134,6 +135,11 @@ function Dimension(spec, options) {
     return Dimension({value: this.toNumber(targetUnit), unit: targetUnit}, options);
   }
   
+  this.toJSON = function() {
+    return config.toJSON(this);
+  }
+
+  
   this.toString = function(targetUnit, digits) {
     
     // if only a number is specified, use it as digits parameter
@@ -142,9 +148,10 @@ function Dimension(spec, options) {
       targetUnit = undefined;
     }
     
+    
     let val = this.toFixed(digits, targetUnit);
     
-    return val + targetUnit || this.unit;
+    return val + (targetUnit || this.unit);
   }
   
   return this;
