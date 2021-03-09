@@ -59,6 +59,10 @@ let conversions = {
     "deg": (v,c) => conversions.mm.deg(v,c) * (c||config).pixelDensity / 25.4,
     "arcmin": (v,c) => conversions.mm.arcmin(v,c) * (c||config).pixelDensity / 25.4,
     "arcsec": (v,c) => conversions.mm.arcsec(v,c) * (c||config).pixelDensity / 25.4
+  },
+  "deg": {
+    "arcmin": 1/60,
+    "arcsec": 1/3600
   }
 
 };
