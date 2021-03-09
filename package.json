@@ -5,7 +5,8 @@
   "main": "./index.js",
   "exports": "./index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test.js",
+    "debug-test": "mocha --inspect-brk test.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/floledermann/another-dimension/issues"
   },
-  "homepage": "https://github.com/floledermann/another-dimension#readme"
+  "homepage": "https://github.com/floledermann/another-dimension#readme",
+  "devDependencies": {
+    "mocha": "^8.3.1"
+  }
 }
