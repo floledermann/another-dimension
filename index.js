@@ -132,7 +132,7 @@ function Dimension(spec, options) {
     
     if (func) return func(this.value);
     
-    throw "No conversion path from " + this.unit + " to " + targetUnit + " found!";
+    throw new Error("No conversion path from " + this.unit + " to " + targetUnit + " found!");
   }
   
   this.toDimension = function(targetUnit, options) {
