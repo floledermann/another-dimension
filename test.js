@@ -1,45 +1,12 @@
-/*
-let Dimension = require("./index.js");
-
-// configuration for screen-based output scenario
-Dimension.configure({
-  defaultOutputUnit: "px", // convert to pixels when value is used as Number
-  defaultUnit: "px",       // default unit to use if no unit is specified
-  pixelDensity: 440,        // pixel density of Google Pixel 2 smartphone, to convert pixel sizes
-  viewingDistance: 350     // 350mm viewing distance (typical for smartphone use), to convert angular measure
-});
-
-// create some dimensions
-let width = Dimension("10mm");         // 10 mm
-let height = Dimension(100, "arcmin"); // 100 arcmin
-let depth = Dimension(50);             // 50 pixels (as per defaultUnit specified above)
-
-// dimensions can be used in place of numeric primitives, 
-// and will be converted to pixels (as configured above)
-// This will draw a ... x ... pixel rectangle!
-console.log("Result: " + width + ", " + height);
-
-// Dimension containing the length of the diagonal in pixels (set as defaultUnit above)
-let diagonal = Dimension(Math.sqrt(width ** 2 + height ** 2));
-
-console.log("Diagonal: " + diagonal.toString("mm", 2));
-*/
-
 "use strict";
 
 const assert = require("assert");
 const Dimension = require("./index.js");
 
 describe("Dimension", () => {
-  before( () => {
-    //console.log( "before executes once before all tests" );
-  } );
-
-  after( () => {
-    //console.log( "after executes once after all tests" );
-  } );
 
   describe("creation", () => {
+    
     beforeEach( () => {
       //console.log( "beforeEach executes before every test" );
     } );
@@ -179,6 +146,7 @@ describe("Dimension", () => {
   });
 
   describe("conversion", () => {
+    
     it("Convert to another Dimension with different unit with .toDimension()", () => {
       let dim1 = Dimension("1in");
       let dim2 = dim1.toDimension("mm");
@@ -204,7 +172,70 @@ describe("Dimension", () => {
 
   });
   
+  describe("configuration", () => {
+    
+    it("options.defaultUnit", () => {
+      Dimension.configure({defaultUnit: "in"});
+      let dim1 = Dimension(1);
+      assert.equal( dim1.unit, "in");
+      // reset
+      Dimension.configure({defaultUnit: "mm"});
+    });
+
+    it("options.defaultOutputUnit", () => {
+      Dimension.configure({defaultOutputUnit: "mm"});
+      let dim1 = Dimension("1in");
+      assert.equal( dim1 + 0, 25.4);
+      // reset
+      Dimension.configure({defaultOutputUnit: null});
+    });
+
+    it("options.anchorUnit", () => {
+      Dimension.configure({anchorUnit: "x"});
+      Dimension.addConversion("a", "x", 10);
+      Dimension.addConversion("x", "c", 10);
+      let dim1 = Dimension("1a");
+      assert.equal( dim1.toNumber("c"), 100);
+      // reset
+      Dimension.configure({anchorUnit: "mm"});
+    });
+
+    it("options.pixelDensity", () => {
+      Dimension.configure({pixelDensity: 100});
+      let dim1 = Dimension("1in");
+      assert.equal( dim1.toNumber("px"), 100);
+      // reset
+      Dimension.configure({pixelDensity: 96});
+    });
+    
+    it("options.viewingDistance", () => {
+      Dimension.configure({viewingDistance: 300});
+      let dim1 = Dimension("1arcmin");
+      assert.equal( dim1.toFixed(2, "mm"), "0.09");
+      // reset
+      Dimension.configure({viewingDistance: 600});
+    });
+    
+    it("options.aliases", () => {
+      Dimension.configure({aliases: { "foo": "mm" }});
+      let dim1 = Dimension("1foo");
+      assert.equal( dim1.unit, "mm");
+      // reset
+      Dimension.configure({aliases: { "um": "µ", "µm": "µ", "°": "deg"}});
+    });
+    
+    it("options.toJSON", () => {
+      Dimension.configure({toJSON: d => d.value + d.unit });
+      let dim1 = Dimension("1mm");
+      assert.equal( dim1.toJSON(), "1mm");
+      // reset
+      Dimension.configure({toJSON: d => ({value: d.value, unit: d.unit}) });
+    });
+ 
+  });
+  
   describe("aliases", () => {
+    
     it("Alias results in canonical dimension on creation", () => {
       let dim1 = Dimension("1°");
       assert.equal( dim1.value, 1);
@@ -251,13 +282,16 @@ describe("Dimension", () => {
       assert.throws( () => dim1.toNumber("mm"), Error);
     });
 
-
-  });
-  
-  describe("configuration", () => {
+    it("Conversion of custom units through anchorUnit", () => {
+      Dimension.addConversion("a", "mm", 10);
+      Dimension.addConversion("mm", "c", 10);
+      let dim1 = Dimension("1a");
+      assert.equal( dim1.toNumber("c"), 100);
+      // reverse indirect path does not work (yet)
+      //let dim2 = Dimension("1c");
+      //assert.equal( dim2.toNumber("a"), 0.01);
+    });
     
-    // TODO
-
   });
   
 });
