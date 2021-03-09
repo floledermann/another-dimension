@@ -27,10 +27,10 @@ let conversions = {
     "thou": 0.0254,
     "pt": 25.4 / 72,
     "pc": 25.4 / 6,
-    "px": v => v * 25.4 / config.pixelDensity,
-    "deg": v => Math.tan(v / 2 / 180 * Math.PI ) * 2 * config.viewingDistance,
-    "arcmin": v => conversions.mm.deg(v/60),
-    "arcsec": v => conversions.mm.deg(v/3600)
+    "px": (v,c) => v * 25.4 / (c||config).pixelDensity,
+    "deg": (v,c) => Math.tan(v / 2 / 180 * Math.PI ) * 2 * (c||config).viewingDistance,
+    "arcmin": (v,c) => conversions.mm.deg(v/60, c),
+    "arcsec": (v,c) => conversions.mm.deg(v/3600, c)
   },
   "in": {
     "m": 1 / 0.0254,
@@ -41,24 +41,24 @@ let conversions = {
     "thou": 0.001,
     "pt": 1 / 72,
     "pc": 1 / 6,
-    "px": v => v / options.pixelDensity,
-    "deg": v => conversions.mm.deg(v) / 25.4,
-    "arcmin": v => conversions.mm.arcmin(v) / 25.4,
-    "arcsec": v => conversions.mm.arcsec(v) / 25.4      
+    "px": (v,c) => v / (c||config).pixelDensity,
+    "deg": (v,c) => conversions.mm.deg(v,c) / 25.4,
+    "arcmin": (v,c) => conversions.mm.arcmin(v,c) / 25.4,
+    "arcsec": (v,c) => conversions.mm.arcsec(v,c) / 25.4      
   },
   "px": {
-    "m": v => v * config.pixelDensity / 0.0254,
-    "cm": v => v * config.pixelDensity / 2.54,
-    "mm": v => v * config.pixelDensity / 25.4,
-    "hm": v => v * config.pixelDensity / 2540,
-    "µ": v => v * config.pixelDensity / 25400,
-    "in": v => v * config.pixelDensity,
-    "thou": v => v * config.pixelDensity / 1000,
-    "pt": v => v * config.pixelDensity / 72,
-    "pc": v => v * config.pixelDensity / 6,
-    "deg": v => conversions.mm.deg(v) * config.pixelDensity / 25.4,
-    "arcmin": v => conversions.mm.arcmin(v) * config.pixelDensity / 25.4,
-    "arcsec": v => conversions.mm.arcsec(v) * config.pixelDensity / 25.4
+    "m": (v,c) => v * (c||config).pixelDensity / 0.0254,
+    "cm": (v,c) => v * (c||config).pixelDensity / 2.54,
+    "mm": (v,c) => v * (c||config).pixelDensity / 25.4,
+    "hm": (v,c) => v * (c||config).pixelDensity / 2540,
+    "µ": (v,c) => v * (c||config).pixelDensity / 25400,
+    "in": (v,c) => v * (c||config).pixelDensity,
+    "thou": (v,c) => v * (c||config).pixelDensity / 1000,
+    "pt": (v,c) => v * (c||config).pixelDensity / 72,
+    "pc": (v,c) => v * (c||config).pixelDensity / 6,
+    "deg": (v,c) => conversions.mm.deg(v,c) * (c||config).pixelDensity / 25.4,
+    "arcmin": (v,c) => conversions.mm.arcmin(v,c) * (c||config).pixelDensity / 25.4,
+    "arcsec": (v,c) => conversions.mm.arcsec(v,c) * (c||config).pixelDensity / 25.4
   }
 
 };
