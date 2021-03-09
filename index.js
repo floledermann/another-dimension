@@ -107,7 +107,7 @@ function Dimension(spec, options) {
   }
   
   this.value = spec.value || 0;
-  this.unit = spec.unit;
+  this.unit = Dimension.unAlias(spec.unit);
   
   this.valueOf = function() {
     if (config.defaultOutputUnit) {
