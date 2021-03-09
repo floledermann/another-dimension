@@ -2,7 +2,8 @@
   "name": "another-dimension",
   "version": "0.0.1",
   "description": "A lightweight library for converting units of length",
-  "main": "index.js",
+  "main": "./index.js",
+  "exports": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
