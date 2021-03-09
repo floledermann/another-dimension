@@ -178,14 +178,8 @@ Dimension.unAlias = function(unit) {
 
 Dimension.addAlias = function(unit, alias) {
   
-  if (!Array.isArray(aliases)) {
-    aliasesList[alias] = unit;
-  }
-  else {
-    for (let a of alias) {
-      aliasesList[a] = unit;
-    }
-  }
+  config.aliases[alias] = unit;
+  
 }
 
 Dimension.addConversion = function(fromUnit, toUnit, factorOrFunction) {
