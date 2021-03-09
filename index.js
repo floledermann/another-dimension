@@ -86,7 +86,7 @@ function Dimension(spec, options) {
 
   
   if (typeof spec == "string") {
-    spec = Dimension.parseUnit(spec);
+    spec = Dimension.parseDimensionString(spec);
   }
   else if (typeof spec == "object" && "value" in spec) {
     spec = {
@@ -258,7 +258,7 @@ Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
   return null;
 }
 
-Dimension.parseUnit = function(str) {
+Dimension.parseDimensionString = function(str) {
   
   let match = config.dimensionRegEx.exec(str);
   if (match) {
