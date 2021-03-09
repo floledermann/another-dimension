@@ -229,8 +229,8 @@ Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
   }
 
   // indirect conversion
-  conversion = conversions.mm?.[fromUnit];
-  let conversion2 = conversions[toUnit]?.mm;
+  conversion = conversions[config.anchorUnit]?.[fromUnit];
+  let conversion2 = conversions[toUnit]?.[config.anchorUnit];
   let func = null;
   
   if (conversion && conversion2) {
