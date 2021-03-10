@@ -16,7 +16,7 @@ Why another unit conversion library?
 *********************************************************************
 
 
-|&nbsp;—&nbsp;[**In&nbsp;a&nbsp;Nutshell**](#another-dimension-in-a-nutshell)&nbsp;— |&nbsp;—&nbsp;[**Installation&nbsp;&amp;&nbsp;Import**](#installation--import)&nbsp;— |&nbsp;—&nbsp;[**API&nbsp;Documentation**](#api-documentation)&nbsp;— |&nbsp;—&nbsp;[**Supported&nbsp;Units**](#supported-units)&nbsp;— |&nbsp;—&nbsp;[**Credits**](#credits)&nbsp;—&nbsp;|
+|&nbsp;–&nbsp;[**In&nbsp;a&nbsp;Nutshell**](#another-dimension-in-a-nutshell)&nbsp;–&nbsp;| |&nbsp;–&nbsp;[**Installation&nbsp;&amp;&nbsp;Import**](#installation--import)&nbsp;–&nbsp;| |&nbsp;–&nbsp;[**API&nbsp;Documentation**](#api-documentation)&nbsp;–&nbsp;| |&nbsp;–&nbsp;[**Supported&nbsp;Units**](#supported-units)&nbsp;–&nbsp;| |&nbsp;–&nbsp;[**Credits**](#credits)&nbsp;–&nbsp;|
 
 
 *********************************************************************
@@ -190,7 +190,7 @@ let inches = dim.toNumber();  // 1
 
 #### *`dimensionInstance.toJSON()`*
 
-Returns a plain JavaScript object containing entries for `value` and `unit`, unless configured otherwise in `options.toJSON`.
+Returns a plain JavaScript object containing entries for `value` and `unit`, unless configured otherwise by setting the `toJSON` option with [`Dimension.configure()`](#dimensionconfigureoptions).
 
 
 *********************************************************************
