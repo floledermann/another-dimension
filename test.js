@@ -7,10 +7,6 @@ describe("Dimension", () => {
 
   describe("creation", () => {
     
-    beforeEach( () => {
-      //console.log( "beforeEach executes before every test" );
-    } );
-    
     it("Constructor syntax", () => {
       assert( (new Dimension()) instanceof Dimension);
     });
