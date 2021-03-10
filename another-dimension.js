@@ -120,9 +120,7 @@ function Dimension(spec, options) {
   
   this.toFixed = function(digits, targetUnit) {
     let val = this.toNumber(targetUnit);
-    if (digits !== undefined && digits !== null) {
-      val = val.toFixed(digits);
-    }
+    val = val.toFixed(digits);
     return val;
   }
   
@@ -145,7 +143,6 @@ function Dimension(spec, options) {
     return config.toJSON(this);
   }
 
-  
   this.toString = function(targetUnit, digits) {
     
     // if only a number is specified, use it as digits parameter
@@ -154,8 +151,14 @@ function Dimension(spec, options) {
       targetUnit = undefined;
     }
     
+    let val;
     
-    let val = this.toFixed(digits, targetUnit);
+    if (digits === undefined) {
+      val = this.toNumber(targetUnit);
+    } 
+    else {
+      val = this.toFixed(digits, targetUnit);
+    }
     
     return val + (targetUnit || this.unit);
   }
