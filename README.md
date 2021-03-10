@@ -94,7 +94,7 @@ console.log(dim.toString("mm")); // -> 25.4mm
 </script>
 ```
 
-*Note: `another-dimension` works out of the box like this for prototyping in modern browsers. For compatibility with older browsers, include the library in your usual preprocessing workflow.*
+*Note: `another-dimension` works out of the box like this for prototyping in modern browsers. For compatibility with older browsers and optimized delivery consider compiling your project code, including this library, using [Babel](https://babeljs.io/) or similar tools.*
 
 *********************************************************************
 
