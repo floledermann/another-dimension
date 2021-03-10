@@ -15,31 +15,44 @@ body {
 </head>
 <body>
 
+<script>
+function printError(message) {
+  document.write('<div class="error">Error: ' + message + '</div>');
+}
+
+let keys = Object.keys(window);
+</script>
+
 <script src="another-dimension.js"></script>
 
 <script>
 try {
-  document.write("Testing another-dimension default import...\n");
-  let dim1 = Dimension("1in");
-  if (dim1.toNumber("mm") != 25.4) throw Error("Incorrect conversion\n");
+  document.write("Testing for namespace pollution...\n");
+
+  let keys2 = Object.keys(window);
+
+  let addedKeys = keys2.filter(k => !keys.includes(k));
+  if (!addedKeys.length == 0) {
+    throw new Error("Script introduced global variables: " + addedKeys.join(","));
+  }
   document.write("All OK.");
 }
 catch (error) {
-  document.write('<div class="error">Error: ' + error.message + '</div>');
+  printError(error);
 }
 </script>
 
-<script src="another-dimension.js" data-global-name="MyDimension"></script>
+<script src="another-dimension.js" data-another-dimension="Dimension"></script>
 
 <script>
 try {
-  document.write("Testing another-dimension renamed import...\n");
-  let dim1 = MyDimension("1in");
-  if (dim1.toNumber("mm") != 25.4) throw Error("Incorrect conversion\n");
+  document.write("Testing another-dimension named import...\n");
+  let dim1 = Dimension("1in");
+  if (dim1.toNumber("mm") != 25.4) throw new Error("Incorrect conversion\n");
   document.write("All OK.");
 }
 catch (error) {
-  document.write('<div class="error">Error: ' + error.message + '</div>');
+  printError(error);
 }
 </script>
 

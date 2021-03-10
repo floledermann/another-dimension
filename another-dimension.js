@@ -292,15 +292,12 @@ if (typeof module == "object" && typeof module.exports == "object") {
 }
 
 // Browser - allow for configurable global name
-if (typeof window != "undefined" && typeof window.document != "undefined") {
-  let globalName = "Dimension";
-  if (document?.currentScript) {
-    let attr = document?.currentScript.getAttribute("data-global-name");
-    if (attr) {
-      globalName = attr;
-    }
-  }
-  window[globalName] = Dimension;
+let globalName;
+if (typeof window != "undefined" 
+    && typeof document != "undefined"
+    && document.currentScript?.getAttribute
+    && (globalName = document.currentScript.getAttribute("data-another-dimension"))) {
+   window[globalName] = Dimension;
 }
 
 // end IIFE wrapping
