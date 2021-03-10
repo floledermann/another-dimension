@@ -5,7 +5,7 @@ const Dimension = require("./index.js");
 
 describe("Dimension", () => {
 
-  describe("creation", () => {
+  describe("Creation", () => {
     
     it("Constructor syntax", () => {
       assert( (new Dimension()) instanceof Dimension);
@@ -87,7 +87,7 @@ describe("Dimension", () => {
     
   });
   
-  describe("basic output", () => {
+  describe("Basic output", () => {
 
     it("Output unconverted value with .toNumber()", () => {
       let dim1 = Dimension("1in");
@@ -141,7 +141,7 @@ describe("Dimension", () => {
     
   });
 
-  describe("conversion", () => {
+  describe("Conversion", () => {
     
     it("Convert to another Dimension with different unit with .toDimension()", () => {
       let dim1 = Dimension("1in");
@@ -168,7 +168,7 @@ describe("Dimension", () => {
 
   });
   
-  describe("configuration", () => {
+  describe("Configuration", () => {
     
     it("options.defaultUnit", () => {
       Dimension.configure({defaultUnit: "in"});
@@ -230,7 +230,7 @@ describe("Dimension", () => {
  
   });
   
-  describe("aliases", () => {
+  describe("Aliases", () => {
     
     it("Alias results in canonical dimension on creation", () => {
       let dim1 = Dimension("1°");
@@ -260,7 +260,7 @@ describe("Dimension", () => {
 
   });
 
-  describe("custom units", () => {
+  describe("Custom units", () => {
     
     it("Add custom unit with conversion factor using Dimension.addConversion()", () => {
       Dimension.addConversion("a", "b", 10);
@@ -290,7 +290,7 @@ describe("Dimension", () => {
     
   });
 
-  describe("bundling", () => {
+  describe("Bundling", () => {
     
     it("Import as ES6 module", () => {
       return import("./index.js").then(module => {
