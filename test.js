@@ -302,4 +302,8 @@ describe("Dimension", () => {
     
   });
   
+  after(function(){
+    console.log('\n    ... open test.html in browser to run browser-specific tests.')
+  })  
+  
 });
