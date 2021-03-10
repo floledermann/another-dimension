@@ -1,4 +1,6 @@
-
+// wrap in IIFE for direct use in browser without polluting the global scope
+(function() {
+  
 let config = {
   defaultUnit: "mm",
   defaultOutputUnit: null, // default unit when converted to number
@@ -280,5 +282,29 @@ Dimension.parseDimensionString = function(str) {
   return null;
 }
 
+// ----------------------------------------------------
+// v- Boilerplate for Node/Browser module definition -v
+// ----------------------------------------------------
 
-module.exports = Dimension;
+// Node.js
+if (typeof module == "object" && typeof module.exports == "object") {
+  module.exports = Dimension;
+}
+
+// Browser - allow for configurable global name
+if (typeof window != "undefined" && typeof window.document != "undefined") {
+  let globalName = "Dimension";
+  if (window?.location?.search) {
+    let query = window.location.search.substring(1);
+    query = query.split("&").map(s => s.split("=")).filter(arr => arr[0] == "global");
+    if (query.length && query[0][1]) {
+      globalName = query[0][1];
+    }
+  }
+  window[globalName] = Dimension;
+}
+
+// end IIFE wrapping
+})();
+
+
