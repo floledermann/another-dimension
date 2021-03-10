@@ -96,6 +96,7 @@ console.log(dim.toString("mm")); // -> 25.4mm
 
 *Note: `another-dimension` works out of the box like this for prototyping in modern browsers. For compatibility with older browsers and optimized delivery consider compiling your project code, including this library, using [Babel](https://babeljs.io/) or similar tools.*
 
+
 *********************************************************************
 
 
@@ -178,12 +179,38 @@ let inches = dim.toNumber();  // 1
 
 #### *`dimensionInstance.toString([targetUnit], [digits])`*
 
+Returns a String representation of the dimension (e.g. `"12.1mm"`).
+
+**`targetUnit`** Unit to convert to.
+
+**`digits`** Number of digits after the comma to include.
+
+```javascript
+let dim = Dimension("1.8in");
+
+let mmStr = dim.toString("mm");       // "45.72mm"
+let mmRound = dim.toString("mm", 1);  // "45.7mm"
+let round = dim.toString(2);          // "1.80in"
+```
 
 *********************************************************************
 
 
 #### *`dimensionInstance.toFixed([digits[, targetUnit]])`*
 
+Returns a String representation of the numeric value of the dimension with fixed precision (e.g. `"12.1"`), similar to the JavaScript builtin [`Number.toFixed()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed).
+
+**`digits`** Number of digits after the comma to include. If omitted, it is considered 0, i.e. rounding to full integer.
+
+**`targetUnit`** Unit to convert to.
+
+```javascript
+let dim = Dimension("1.8in");
+
+let fixed = dim.toFixed(2);          // "1.80"
+let mmFixed = dim.toFixed(1, "mm");  // "45.7"
+let round = dim.toFixed();           // "2"
+```
 
 *********************************************************************
 
@@ -249,6 +276,7 @@ Default **`config.dimensionRegEx`**: `/^\s*(?<value>-?[0-9]*\.?[0-9]+)\s*(?<unit
 
 (This allows for padding whitespace, whitespace separating value and unit, and special characters (but no digits) in the unit specifier.)
 
+
 *********************************************************************
 
 
@@ -313,17 +341,47 @@ console.log(length.toString());
 
 #### *`Dimension.getConversionFunction(fromUnit, toUnit[, options])`*
 
+Return a specific conversion function. The returned function will accept a single parameter - the value to convert - and will return the converted value.
+
+**`fromUnit`** String specifying the unit to convert from.
+
+**`toUnit`** String specifying the unit to convert to.
+
+**`options`** Object with some of the following entries:
+
+**`options.freezeConfig`**: If set to true, the current configuration (e.g. pixelDensity, viewingDistance) will be "frozen", so that subsequent changes to those parameters won't affect the conversion function. If not set (the default), changes to the global configuration will affect the conversion performed by the returned function, if applicable.
+
+```js
+let conv = Dimension.getConversionFunction("in", "mm");
+
+let mm = conv(1);   // 25.4
+```
 
 *********************************************************************
 
 
 #### *`Dimension.unAlias(unit)`*
 
+Returns the canonical unit referenced by the given alias, or the unit passed in if no such alias is defined.
+
+```js
+let unit = Dimension.unAlias("°");
+
+console.log(unit);
+// => "deg"
+```
+
 
 *********************************************************************
 
 
-#### *`Dimension.parseUnit(dimensionString)`*
+#### *`Dimension.parseDimensionString(dimensionString)`*
+
+Parses a String into a plain JS object containing entries for `value` and `unit`, using the built-in or [configured](#dimensionconfigureoptions) `dimensionRegEx` regular expression.
+
+If the String contains no unit but a number, the `defaultUnit` is used as unit.
+
+If neither `dimensionRegEx` nor number match, the function returns null.
 
 
 *********************************************************************
