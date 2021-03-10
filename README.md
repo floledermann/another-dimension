@@ -81,7 +81,7 @@ import Dimension from 'another-dimension';
 
 ### Browser
 
-For direct use in the browser, download the file [`another-dimension.js`](https://raw.githubusercontent.com/floledermann/another-dimension/main/another-dimension.js) and load it using a `&lt;script&gt;` tag.
+For direct use in the browser, download the file [`another-dimension.js`](https://raw.githubusercontent.com/floledermann/another-dimension/main/another-dimension.js) and load it using a `<script>` tag.
 
 Add the attribute `data-another-dimension` to the script tag, specifying the global name to use for the Dimension object. This attribute needs to be included, otherwise no global name is assigned!
 
