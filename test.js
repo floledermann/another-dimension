@@ -289,5 +289,17 @@ describe("Dimension", () => {
     });
     
   });
+
+  describe("bundling", () => {
+    
+    it("Import as ES6 module", () => {
+      return import("./index.js").then(module => {
+        let DimensionES6 = module.default;
+        let dim1 = DimensionES6("1mm");
+        assert.equal( dim1.value, 1);
+      });
+    });
+    
+  });
   
 });
