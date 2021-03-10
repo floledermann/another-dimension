@@ -166,6 +166,39 @@ describe("Dimension", () => {
       Dimension.configure({pixelDensity: 96});
     });
 
+    it("toFixed() returns numeric part with given decimal precision", () => {
+      let dim1 = Dimension("11.123456789mm");
+      assert.equal(dim1.toFixed(1), "11.1");
+      assert.equal(dim1.toFixed(5), "11.12346");
+    });
+
+    it("toFixed() rounds to integer if precision not specified", () => {
+      let dim1 = Dimension("11.123456789mm");
+      assert.equal(dim1.toFixed(), "11");
+      let dim2 = Dimension("11.789mm");
+      assert.equal(dim2.toFixed(), "12");
+    });
+
+    it("toFixed() with conversion", () => {
+      let dim1 = Dimension("1in");
+      assert.equal(dim1.toFixed(0, "mm"), "25");
+    });
+
+    it("toString() returns String with given decimal precision and unit", () => {
+      let dim1 = Dimension("11.123456789mm");
+      assert.equal(dim1.toString("mm",2), "11.12mm");
+    });
+
+    it("toString() with precision as only parameter", () => {
+      let dim1 = Dimension("11.123456789mm");
+      assert.equal(dim1.toString(2), "11.12mm");
+    });
+
+    it("toString() with conversion", () => {
+      let dim1 = Dimension("1.8in");
+      assert.equal(dim1.toString("mm", 1), "45.7mm");  // 45.72
+    });
+
   });
   
   describe("Configuration", () => {
