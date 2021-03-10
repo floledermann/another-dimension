@@ -378,7 +378,7 @@ The list of built-in units is deliberately kept short. New units can be added qu
 
 ## Credits
 
-**`another-dimension`** was created by Florian Ledermann (🔗 [Twitter](https://twitter.com/floledermann)) as part of the [stimsrv](https://github.com/floledermann/stimsrv) project.
+**`another-dimension`** was created by [Florian Ledermann](https://twitter.com/floledermann) as part of the [stimsrv](https://github.com/floledermann/stimsrv) project.
 
 License: MIT License.
  
