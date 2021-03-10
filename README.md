@@ -16,7 +16,7 @@ Why another unit conversion library?
 *********************************************************************
 
 
-|&nbsp;—&nbsp;[**In&nbsp;a&nbsp;Nutshell**](#another-dimension-in-a-nutshell)&nbsp;—&nbsp;|<wbr>|&nbsp;—&nbsp;[**Installation&nbsp;&amp;&nbsp;Import**](#installation--import)&nbsp;—&nbsp;|<wbr>|&nbsp;—&nbsp;[**API&nbsp;Documentation**](#api-documentation)&nbsp;—&nbsp;|<wbr>|&nbsp;—&nbsp;[**Supported&nbsp;Units**](#supported-units)&nbsp;—&nbsp;|<wbr>|&nbsp;—&nbsp;[**Credits**](#credits)&nbsp;—&nbsp;|
+|&nbsp;–&nbsp;[**In&nbsp;a&nbsp;Nutshell**](#another-dimension-in-a-nutshell)&nbsp;–&nbsp;| |&nbsp;–&nbsp;[**Installation&nbsp;&amp;&nbsp;Import**](#installation--import)&nbsp;–&nbsp;| |&nbsp;–&nbsp;[**API&nbsp;Documentation**](#api-documentation)&nbsp;–&nbsp;| |&nbsp;–&nbsp;[**Supported&nbsp;Units**](#supported-units)&nbsp;–&nbsp;| |&nbsp;–&nbsp;[**Credits**](#credits)&nbsp;–&nbsp;|
 
 
 *********************************************************************
