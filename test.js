@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("assert");
-const Dimension = require("./index.js");
+const Dimension = require("./another-dimension.js");
 
 describe("Dimension", () => {
 
@@ -293,7 +293,7 @@ describe("Dimension", () => {
   describe("Bundling", () => {
     
     it("Import as ES6 module", () => {
-      return import("./index.js").then(module => {
+      return import("./another-dimension.js").then(module => {
         let DimensionES6 = module.default;
         let dim1 = DimensionES6("1mm");
         assert.equal( dim1.value, 1);

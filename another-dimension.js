@@ -294,11 +294,10 @@ if (typeof module == "object" && typeof module.exports == "object") {
 // Browser - allow for configurable global name
 if (typeof window != "undefined" && typeof window.document != "undefined") {
   let globalName = "Dimension";
-  if (window?.location?.search) {
-    let query = window.location.search.substring(1);
-    query = query.split("&").map(s => s.split("=")).filter(arr => arr[0] == "global");
-    if (query.length && query[0][1]) {
-      globalName = query[0][1];
+  if (document?.currentScript) {
+    let attr = document?.currentScript.getAttribute("data-global-name");
+    if (attr) {
+      globalName = attr;
     }
   }
   window[globalName] = Dimension;
