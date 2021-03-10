@@ -81,7 +81,7 @@ import Dimension from 'another-dimension';
 
 ### Browser
 
-Download the file [`another-dimension.js`](https://raw.githubusercontent.com/floledermann/another-dimension/main/another-dimension.js) and load it using a `script` tag.
+For direct use in the browser, download the file [`another-dimension.js`](https://raw.githubusercontent.com/floledermann/another-dimension/main/another-dimension.js) and load it using a `script` tag.
 
 Add the attribute `data-another-dimension` to the script tag, specifying the global name to use for the Dimension object. This attribute needs to be included, otherwise no global name is assigned!
 
@@ -90,11 +90,11 @@ Add the attribute `data-another-dimension` to the script tag, specifying the glo
 
 <script>
 let dim = Dimension("1in");
-console.log(dim.toDimension("mm"); // -> 25.4mm
+console.log(dim.toString("mm")); // -> 25.4mm
 </script>
 ```
 
-*Note: `another-dimension` works out of the box in modern browsers. For compatibility with older browsers, include the library in your usual preprocessing workflow.*
+*Note: `another-dimension` works out of the box like this for prototyping in modern browsers. For compatibility with older browsers, include the library in your usual preprocessing workflow.*
 
 *********************************************************************
 
