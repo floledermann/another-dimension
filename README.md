@@ -16,7 +16,7 @@ Why another unit conversion library?
 *********************************************************************
 
 
-|&nbsp;—&nbsp;[**In&nbsp;a&nbsp;Nutshell**](#in-a-nutshell)&nbsp;— |&nbsp;—&nbsp;[**Installation&nbsp;&amp;&nbsp;Import**](#intallation--import)&nbsp;— |&nbsp;—&nbsp;[**API&nbsp;Documentation**](#api-documentation)&nbsp;— |&nbsp;—&nbsp;[**Supported&nbsp;Units**](#supported-units)&nbsp;— |&nbsp;—&nbsp;[**Credits**](#credits)&nbsp;—&nbsp;|
+|&nbsp;—&nbsp;[**In&nbsp;a&nbsp;Nutshell**](#another-dimension-in-a-nutshell)&nbsp;— |&nbsp;—&nbsp;[**Installation&nbsp;&amp;&nbsp;Import**](#installation--import)&nbsp;— |&nbsp;—&nbsp;[**API&nbsp;Documentation**](#api-documentation)&nbsp;— |&nbsp;—&nbsp;[**Supported&nbsp;Units**](#supported-units)&nbsp;— |&nbsp;—&nbsp;[**Credits**](#credits)&nbsp;—&nbsp;|
 
 
 *********************************************************************
@@ -81,7 +81,7 @@ import Dimension from 'another-dimension';
 
 ### Browser
 
-For direct use in the browser, download the file [`another-dimension.js`](https://raw.githubusercontent.com/floledermann/another-dimension/main/another-dimension.js) and load it using a `script` tag.
+For direct use in the browser, download the file [`another-dimension.js`](https://raw.githubusercontent.com/floledermann/another-dimension/main/another-dimension.js) and load it using a `&lt;script&gt;` tag.
 
 Add the attribute `data-another-dimension` to the script tag, specifying the global name to use for the Dimension object. This attribute needs to be included, otherwise no global name is assigned!
 
@@ -378,7 +378,7 @@ The list of built-in units is deliberately kept short. New units can be added qu
 
 ## Credits
 
-**`another-dimension`** was created by Florian Ledermann ([Twitter](https://twitter.com/floledermann)) as part of the [stimsrv](https://github.com/floledermann/stimsrv) project.
+**`another-dimension`** was created by Florian Ledermann (🔗 [Twitter](https://twitter.com/floledermann)) as part of the [stimsrv](https://github.com/floledermann/stimsrv) project.
 
 License: MIT License.
  
