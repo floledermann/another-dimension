@@ -1,6 +1,6 @@
 {
   "name": "another-dimension",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "A lightweight library for converting units of length",
   "main": "./another-dimension.js",
   "exports": "./another-dimension.js",
