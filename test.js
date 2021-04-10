@@ -1,7 +1,7 @@
 "use strict";
 
 const assert = require("assert");
-const Dimension = require("./another-dimension.js");
+const Dimension = require(".");
 
 describe("Dimension", () => {
 
