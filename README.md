@@ -89,12 +89,12 @@ import Dimension from 'another-dimension';
 
 ### Browser
 
-For direct use in the browser, download the file [`another-dimension.js`](https://raw.githubusercontent.com/floledermann/another-dimension/main/another-dimension.js) and load it using a `<script>` tag.
+For direct use in the browser, download the file [`another-dimension-browser.js`](https://raw.githubusercontent.com/floledermann/another-dimension/main/another-dimension-browser.js) and load it using a `<script>` tag.
 
-Add the attribute `data-another-dimension` to the script tag, specifying the global name to use for the Dimension object. This attribute needs to be included, otherwise no global name is assigned!
+By default, another-dimension is made available as a global variable named `Dimension`. You can change the name of the global variable by adding an attribute `data-another-dimension-global` to the script tag, specifying the global name to use for the Dimension object.
 
 ```html
-<script src="another-dimension.js" data-another-dimension="Dimension"></script>
+<script src="another-dimension.js"></script>
 
 <script>
 let dim = Dimension("1in");
@@ -102,7 +102,7 @@ console.log(dim.toString("mm")); // -> 25.4mm
 </script>
 ```
 
-*Note: `another-dimension` works out of the box like this for prototyping in modern browsers. For compatibility with older browsers and optimized delivery consider compiling your project code, including this library, using [Babel](https://babeljs.io/) or similar tools.*
+<small>*Note: `another-dimension` works out of the box like this for prototyping in modern browsers. For compatibility with older browsers and optimized delivery consider compiling your project code, including this library, using [Babel](https://babeljs.io/) or similar tools.*</small>
 
 
 *********************************************************************
