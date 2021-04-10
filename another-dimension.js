@@ -324,8 +324,11 @@ return Dimension;
 
 // Node.js
 //if (typeof module == "object" && typeof module.exports == "object") {
-if (! (typeof module == "undefined")) {
+try {
   module.exports = _Dimension;
+}
+catch (e) {
+  // ignore
 }
 
 // Browser - allow for configurable global name
