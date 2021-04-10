@@ -328,8 +328,8 @@ if (typeof window != "undefined"
 }
 
 // Node.js
-if (typeof module == "object" && typeof module.exports == "object") {
-  module.exports = Dimension;
+if (typeof module != "undefined" || typeof exports != "undefined") {
+  exports = module.exports = Dimension;
 }
 
 // end IIFE wrapping
