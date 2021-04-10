@@ -31,10 +31,10 @@ const Dimension = require('another-dimension');
 
 // Create some dimensions
 let width  = Dimension("10mm");       // 10 mm
-let length = Dimension("2in");        // 2 inch
+let length = Dimension("1.8in");      // 1.8 inch
 
-console.log(`Length in mm: ${length.toString("mm")}`);
-// => "Length in mm: 
+console.log(`Metric length: ${length.toString("mm")}`);
+// => "Metric length: 45.72mm"
 
 // Optional: Configuration of global settings
 Dimension.configure({
