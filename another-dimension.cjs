@@ -323,6 +323,7 @@ return Dimension;
 // ----------------------------------------------------
 
 // Browser - allow for configurable global name
+/*
 let globalName;
 if (typeof window != "undefined" 
     && typeof document != "undefined"
@@ -330,10 +331,12 @@ if (typeof window != "undefined"
     && (globalName = document.currentScript.getAttribute("data-another-dimension"))) {
    window[globalName] = _Dimension;
 }
-
+*/
 // Node.js
 //if (typeof module == "object" && typeof module.exports == "object") {
+
 module.exports = _Dimension;
+
 //}
 
 
