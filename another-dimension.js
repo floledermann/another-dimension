@@ -1,3 +1,25 @@
+// UMD header
+(function (root, factory) {     
+  // AMD
+  if (typeof define === 'function' && define.amd) { 
+    define([],factory);
+  }
+  // Node, CommonJS-like
+  else if (typeof exports === 'object') {         
+    module.exports = factory();
+  }
+  // Browser globals
+  else {                                          
+    let globalName = "Dimension";
+    if (document?.currentScript?.getAttribute) {
+      globalName = document.currentScript.getAttribute("data-another-dimension-global") || globalName;
+    }
+    root[globalName] = factory();
+  }
+}(this, function () {
+  
+// start library code 
+  
 
 let config = {
   defaultUnit: "mm",
@@ -310,5 +332,10 @@ Dimension.getUnits = function() {
   return Array.from(units);
 }
 
+return Dimension;
 
-module.exports = Dimension;
+// UMD end
+
+}));
+
+
