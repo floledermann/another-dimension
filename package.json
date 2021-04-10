@@ -2,14 +2,14 @@
   "name": "another-dimension",
   "version": "0.4.2",
   "description": "A lightweight library for converting units of length",
-  "main": "./another-dimension.cjs",
+  "main": "./another-dimension.js",
   "exports": {
     "import": "./wrapper.mjs",
-    "require": "./another-dimension.cjs"
+    "require": "./another-dimension.js"
   },
   "scripts": {
-    "test": "mocha test.js",
-    "debug-test": "mocha --inspect-brk test.js"
+    "test": "mocha test.js test.mjs",
+    "debug-test": "mocha --inspect-brk test.js test.mjs"
   },
   "repository": {
     "type": "git",

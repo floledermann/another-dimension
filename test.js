@@ -387,8 +387,8 @@ describe("Dimension", () => {
   
   describe("Bundling", () => {
     
-    it("Import as ES6 module", () => {
-      return import("./another-dimension.cjs").then(module => {
+    it("Import as ES6 module using import() function", () => {
+      return import("./another-dimension.js").then(module => {
         let DimensionES6 = module.default;
         let dim1 = DimensionES6("1mm");
         assert.equal( dim1.value, 1);
@@ -397,8 +397,9 @@ describe("Dimension", () => {
     
   });
   
-  after(function(){
-    console.log('\n    ... open test.html in browser to run browser-specific tests.')
-  })  
-  
 });
+
+after(function(){
+  console.log('\n    ... open test.html in browser to run browser-specific tests.')
+})  
+  

@@ -1,2 +1,2 @@
-import Dimension from './another-dimension.cjs';
+import Dimension from './another-dimension.js';
 export default Dimension;

@@ -1,6 +1,6 @@
 
 // wrap in IIFE for direct use in browser without polluting the global scope
-let _Dimension = (function() {
+(function() {
   
 let config = {
   defaultUnit: "mm",
@@ -313,31 +313,29 @@ Dimension.getUnits = function() {
   return Array.from(units);
 }
 
-return Dimension;
-
-// end IIFE wrapping
-})();
-
 // ----------------------------------------------------
 // v- Boilerplate for Node/Browser module definition -v
 // ----------------------------------------------------
 
 // Browser - allow for configurable global name
-/*
+
 let globalName;
 if (typeof window != "undefined" 
     && typeof document != "undefined"
     && document.currentScript?.getAttribute
     && (globalName = document.currentScript.getAttribute("data-another-dimension"))) {
-   window[globalName] = _Dimension;
+   window[globalName] = Dimension;
 }
-*/
+
 // Node.js
-//if (typeof module == "object" && typeof module.exports == "object") {
+if (typeof module == "object" && typeof module.exports == "object") {
+  module.exports = Dimension;
+}
 
-module.exports = _Dimension;
+// end IIFE wrapping
+})();
 
-//}
+
 
 
 
