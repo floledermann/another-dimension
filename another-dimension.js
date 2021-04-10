@@ -317,7 +317,8 @@ Dimension.getUnits = function() {
 // ----------------------------------------------------
 
 // Node.js
-if (typeof module == "object" && typeof module.exports == "object") {
+//if (typeof module == "object" && typeof module.exports == "object") {
+if (! (typeof module == "undefined")) {
   module.exports = Dimension;
 }
 
