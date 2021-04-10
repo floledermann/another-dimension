@@ -1,4 +1,4 @@
-{
+
 // wrap in IIFE for direct use in browser without polluting the global scope
 let _Dimension = (function() {
   
@@ -322,15 +322,6 @@ return Dimension;
 // v- Boilerplate for Node/Browser module definition -v
 // ----------------------------------------------------
 
-// Node.js
-//if (typeof module == "object" && typeof module.exports == "object") {
-try {
-  module.exports = _Dimension;
-}
-catch (e) {
-  // ignore
-}
-
 // Browser - allow for configurable global name
 let globalName;
 if (typeof window != "undefined" 
@@ -339,6 +330,12 @@ if (typeof window != "undefined"
     && (globalName = document.currentScript.getAttribute("data-another-dimension"))) {
    window[globalName] = _Dimension;
 }
-}
+
+// Node.js
+//if (typeof module == "object" && typeof module.exports == "object") {
+module.exports = _Dimension;
+//}
+
+
 
 
