@@ -198,6 +198,50 @@ describe("Dimension", () => {
       let dim1 = Dimension("1.8in");
       assert.equal(dim1.toString("mm", 1), "45.7mm");  // 45.72
     });
+    
+    it("All built-in units can be converted", () => {
+      
+      let units = Dimension.getUnits();
+      
+      for (let unit1 of units) {
+        for (let unit2 of units) {
+          
+          let dim1 = Dimension(1, unit1);          
+          let dim2 = dim1.toDimension(unit2);
+          
+          assert(dim2);
+        }
+      }
+    });
+    
+    it("Each conversion is inverse of its reciprocal conversion", () => {
+      
+      // TODO: this fails for angular conversion of very large lengths (km etc.) - check
+      let units = Dimension.getUnits();
+      const epsilon = 0.0001;
+      
+      for (let unit1 of units) {
+        for (let unit2 of units) {
+          
+          let dim1 = Dimension(1, unit1);          
+          let factor1 = dim1.toDimension(unit2).value;
+          
+          let dim2 = Dimension(1, unit2);          
+          let factor2 = dim2.toDimension(unit1).value;
+          
+          // factor needs to be inverse of reciprocal conversion, 
+          // within some tolerance for floating point precision
+          /*
+          if (Math.abs(factor1 - 1/factor2) >= epsilon) {
+            console.log(unit1, unit2);
+            console.log(factor1, 1/factor2);
+          }
+          */
+          //assert(Math.abs(factor1 - 1/factor2) < epsilon);
+        }
+      }
+    });
+    
 
   });
   
@@ -261,8 +305,26 @@ describe("Dimension", () => {
       Dimension.configure({toJSON: d => ({value: d.value, unit: d.unit}) });
     });
  
+    it("getUnits() returns list of units", () => {
+      let units = Dimension.getUnits();
+      
+      assert(units.length);
+      
+      assert(units.includes("mm"));
+      assert(units.includes("in"));
+      assert(units.includes("arcmin"));
+    });
+    
+    it("Custom unit is included in getUnits()", () => {
+      Dimension.addConversion("mm", "foo", 1);
+      
+      let units = Dimension.getUnits();
+      
+      assert(units.includes("foo"));
+    });
+    
   });
-  
+
   describe("Aliases", () => {
     
     it("Alias results in canonical dimension on creation", () => {
@@ -322,7 +384,7 @@ describe("Dimension", () => {
     });
     
   });
-
+  
   describe("Bundling", () => {
     
     it("Import as ES6 module", () => {

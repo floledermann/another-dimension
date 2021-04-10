@@ -63,8 +63,19 @@ let conversions = {
     "arcsec": (v,c) => conversions.mm.arcsec(v,c) * (c||config).pixelDensity / 25.4
   },
   "deg": {
+    "mm": (v,c) => Math.atan2(v, 2 * (c||config).viewingDistance) / Math.PI * 360,
     "arcmin": 1/60,
     "arcsec": 1/3600
+  },
+  "arcmin": {
+    "mm": (v,c) => Math.atan2(v, 2 * (c||config).viewingDistance) / Math.PI * 360 * 60,
+    "deg": 60,
+    "arcsec": 1/60
+  },
+  "arcsec": {
+    "mm": (v,c) => Math.atan2(v, 2 * (c||config).viewingDistance) / Math.PI * 360 * 3600,
+    "deg": 3600,
+    "arcmin": 60
   }
 
 };
