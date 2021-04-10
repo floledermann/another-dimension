@@ -1,4 +1,6 @@
 
+(function() { 
+
 let config = {
   defaultUnit: "mm",
   defaultOutputUnit: null, // default unit when converted to number
@@ -311,4 +313,16 @@ Dimension.getUnits = function() {
 }
 
 
-module.exports = Dimension;
+//module.exports = Dimension;
+
+// Browser export
+let globalName = "Dimension";
+
+if (typeof window != "undefined" && typeof document != "undefined") {
+  if (document.currentScript?.getAttribute) {
+    globalName = document.currentScript.getAttribute("data-another-dimension-global") || globalName;
+  }
+  window[globalName] = Dimension;
+}
+
+})();

@@ -19,22 +19,15 @@ body {
 function printError(message) {
   document.write('<div class="error">Error: ' + message + '</div>');
 }
-
-let keys = Object.keys(window);
 </script>
 
-<script src="another-dimension.js"></script>
+<script src="another-dimension-browser.js"></script>
 
 <script>
 try {
-  document.write("Testing for namespace pollution...\n");
-
-  let keys2 = Object.keys(window);
-
-  let addedKeys = keys2.filter(k => !keys.includes(k));
-  if (!addedKeys.length == 0) {
-    throw new Error("Script introduced global variables: " + addedKeys.join(","));
-  }
+  document.write("Testing another-dimension named import...\n");
+  let dim1 = Dimension("1in");
+  if (dim1.toNumber("mm") != 25.4) throw new Error("Incorrect conversion\n");
   document.write("All OK.");
 }
 catch (error) {
@@ -42,12 +35,12 @@ catch (error) {
 }
 </script>
 
-<script src="another-dimension.js" data-another-dimension="Dimension"></script>
+<script src="another-dimension-browser.js" data-another-dimension-global="XDimension"></script>
 
 <script>
 try {
   document.write("Testing another-dimension named import...\n");
-  let dim1 = Dimension("1in");
+  let dim1 = XDimension("1in");
   if (dim1.toNumber("mm") != 25.4) throw new Error("Incorrect conversion\n");
   document.write("All OK.");
 }
