@@ -11,7 +11,7 @@
   // Browser globals
   else {                                          
     let globalName = "Dimension";
-    if (document?.currentScript?.getAttribute) {
+    if (document && document.currentScript && document.currentScript.getAttribute) {
       globalName = document.currentScript.getAttribute("data-another-dimension-global") || globalName;
     }
     root[globalName] = factory();
@@ -103,7 +103,7 @@ let conversions = {
 
 function Dimension(spec, options) {
   
-  if (spec instanceof Dimension && !options?.clone) {
+  if (spec instanceof Dimension && (!options || !options.clone)) {
     // short-circuit if spec is already a Dimension
     return spec;
   }
@@ -128,14 +128,14 @@ function Dimension(spec, options) {
   else if (typeof spec == "object" && "value" in spec) {
     spec = {
       value: spec.value,
-      unit: spec.unit || options?.defaultUnit || config.defaultUnit
+      unit: spec.unit || options.defaultUnit
     }
   }
   else {
     // Number or Object
     spec = {
-      value: +spec?.valueOf(),
-      unit: options?.defaultUnit || config.defaultUnit
+      value: +(spec||0).valueOf(),
+      unit: options.defaultUnit
     }
   }
   
@@ -233,7 +233,7 @@ Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
 
   let _config;
   
-  if (options?.freezeConfig) {
+  if (options && options.freezeConfig) {
     _config = Object.assign({}, config);
   }
   else {
@@ -249,21 +249,27 @@ Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
   }
 
   // direct conversion
-  let conversion = conversions[toUnit]?.[fromUnit];
-  if (conversion) {
-    if (typeof conversion == "function") {
-      return value => conversion(value, _config)
+  let conversionsToUnit = conversions[toUnit];
+  if (conversionsToUnit) {
+    let conversion = conversionsToUnit[fromUnit];
+    if (conversion) {
+      if (typeof conversion == "function") {
+        return value => conversion(value, _config)
+      }
+      return value => value * conversion;
     }
-    return value => value * conversion;
   }
   
   // reverse conversion
   // can only be done for numeric factors
-  conversion = conversions[fromUnit]?.[toUnit];
-  if (conversion && typeof conversion == "number") {
-    return value => value / conversion;
+  let conversionsFromUnit = conversions[fromUnit];
+  if (conversionsFromUnit) {
+    conversion = conversionsFromUnit[toUnit];
+    if (conversion && typeof conversion == "number") {
+      return value => value / conversion;
+    }
   }
-
+  
   // indirect conversion
   // check if we do not already use the anchorUnit, to avoid infinite recursion
   if (fromUnit != config.anchorUnit && toUnit != config.anchorUnit) {
