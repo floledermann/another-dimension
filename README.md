@@ -33,7 +33,7 @@ const Dimension = require('another-dimension');
 let width  = Dimension("10mm");       // 10 mm
 let length = Dimension("1.8in");      // 1.8 inch
 
-console.log(`Metric length: ${length.toString("mm")}`);
+console.log("Metric length: " + length.toString("mm"));
 // => "Metric length: 45.72mm"
 
 // Optional: Configuration of global settings
@@ -47,20 +47,20 @@ Dimension.configure({
 });
 
 // Create more dimensions
-let height = Dimension(50, "arcmin"); // 50 arcmin
+let height = Dimension(50, "arcmin"); // 50 angular minutes
 let depth  = Dimension(50);           // 50 pixels (as per defaultUnit specified above)
 
 // Dimension objects can be used in place of numeric primitives, 
 // and will implicitly be converted to pixels (as configured above per defaultOutputUnit)
-// This will draw a 173.2 x 176.4 pixel rectangle!
+// This will draw a 173.2 x 88.2 pixel rectangle!
 canvasContext2D.fillRect(0, 0, width, height);
 
 // Dimension containing the length of the diagonal in pixels (set as defaultUnit above)
 let diagonal = Dimension(Math.sqrt(width ** 2 + height ** 2));
 
 // Ouptut diagonal length in mm, using 2 digits precision
-console.log(`Diagonal length: ${diagonal.toString("mm",2)}`);
-// => "Diagonal length: 14.27mm"
+console.log("Diagonal length: " + diagonal.toString("mm",2));
+// => "Diagonal length: 11.22mm"
 ```
 
 
