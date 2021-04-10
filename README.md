@@ -27,6 +27,15 @@ Why another unit conversion library?
 ```javascript
 const Dimension = require('another-dimension');
 
+// Simple use case: unit conversion
+
+// Create some dimensions
+let width  = Dimension("10mm");       // 10 mm
+let length = Dimension("2in");        // 2 inch
+
+console.log(`Length in mm: ${length.toString("mm")}`);
+// => "Length in mm: 
+
 // Optional: Configuration of global settings
 Dimension.configure({
   defaultOutputUnit: "px", // convert to pixels when value is used as Number
@@ -37,8 +46,7 @@ Dimension.configure({
                            //   (used to convert angular dimensions)
 });
 
-// Create some dimensions
-let width  = Dimension("10mm");       // 10 mm
+// Create more dimensions
 let height = Dimension(50, "arcmin"); // 50 arcmin
 let depth  = Dimension(50);           // 50 pixels (as per defaultUnit specified above)
 
