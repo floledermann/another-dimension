@@ -3,7 +3,10 @@
   "version": "0.4.5",
   "description": "A lightweight library for converting units of length",
   "main": "./another-dimension.js",
-  "exports": "./another-dimension.js",
+  "exports": {
+    "import": "./wrapper.mjs",
+    "require": "./another-dimension.js"
+  },
   "browser": "./another-dimension-browser.js",
   "scripts": {
     "build": "node build.mjs",
