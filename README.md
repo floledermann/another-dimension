@@ -387,6 +387,14 @@ If neither `dimensionRegEx` nor number match, the function returns null.
 *********************************************************************
 
 
+#### *`Dimension.getUnits()`*
+
+Returns an Array containing all currently configured Dimensions (without aliases).
+
+
+*********************************************************************
+
+
 ## Supported Units
 
 The list of built-in units is deliberately kept short. New units can be added quickly by providing conversion functions or factors (at minimum to and from the global base unit `config.anchorUnit`) using [`Dimension.addConversion()`](#dimensionaddconversionfromunit-tounit-factororfunction)

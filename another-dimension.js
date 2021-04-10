@@ -285,6 +285,19 @@ Dimension.parseDimensionString = function(str) {
   return null;
 }
 
+Dimension.getUnits = function() {
+  
+  let units = new Set();
+  
+  for (let unit1 of Object.keys(conversions)) {
+    units.add(unit1);
+    for (let unit2 of Object.keys(conversions[unit1])) {
+      units.add(unit2);
+    } 
+  }
+  return Array.from(units);
+}
+
 // ----------------------------------------------------
 // v- Boilerplate for Node/Browser module definition -v
 // ----------------------------------------------------
