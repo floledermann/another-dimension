@@ -4,8 +4,8 @@
 
 Why another unit conversion library?
 
-- **Lightweight, only supporting length units**. If you are looking for general conversion of various units, consider [js-quantities](https://www.npmjs.com/package/js-quantities), [convert-units](https://www.npmjs.com/package/convert-units), [convert](https://www.npmjs.com/package/convert) or others.
-- **Support for [angular dimensions](https://en.wikipedia.org/wiki/Angular_distance) (degrees, arcminutes and arcseconds)** which involve trigonometric calculations in the conversion and depend on viewing distance.
+- **Lightweight, only supporting length units, no dependencies**. If you are looking for general conversion of various units, consider [js-quantities](https://www.npmjs.com/package/js-quantities), [convert-units](https://www.npmjs.com/package/convert-units), [convert](https://www.npmjs.com/package/convert) or others.
+- **Support for [angular dimensions](https://en.wikipedia.org/wiki/Angular_distance) (degrees, arcminutes and arcseconds)** which depend on viewing distance and involve trigonometric calculations in the conversion.
 - **Support for physical screen pixels** taking into account the (configurable) pixel density.
 - Global **configuration of *pixel density* and *viewing distance* for accurate conversion from/to physical screen pixels and angular length units**, as often needed for accurate reproduction of perceptual experiments and user studies.
 - **Modern-style, function-based, highly configurable** implementation.
