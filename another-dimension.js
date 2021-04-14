@@ -263,8 +263,8 @@ Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
   // can only be done for numeric factors
   let conversionsFromUnit = conversions[fromUnit];
   if (conversionsFromUnit) {
-    conversion = conversionsFromUnit[toUnit];
-    if (conversion && typeof conversion == "number") {
+    let conversion = conversionsFromUnit[toUnit];
+    if (typeof conversion == "number") {
       return value => value / conversion;
     }
   }
@@ -272,28 +272,10 @@ Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
   // indirect conversion
   // check if we do not already use the anchorUnit, to avoid infinite recursion
   if (fromUnit != config.anchorUnit && toUnit != config.anchorUnit) {
-    conversion = Dimension.getConversionFunction(fromUnit, config.anchorUnit);
-    let conversion2 = Dimension.getConversionFunction(config.anchorUnit, toUnit);
-    let func = null;
-    
+    let conversion = Dimension.getConversionFunction(fromUnit, config.anchorUnit, options);
+    let conversion2 = Dimension.getConversionFunction(config.anchorUnit, toUnit, options);
     if (conversion && conversion2) {
-      if (typeof conversion == "function") {
-        if (typeof conversion2 == "function") {
-          func = value => conversion2(conversion(value, _config), _config);
-        }
-        else {
-          func = value => conversion2 * conversion(value, _config);
-        }
-      }
-      else {
-        if (typeof conversion2 == "function") {
-          func = value => conversion2(value * conversion, _config);
-        }
-        else {
-          let factor = conversion2 * conversion;
-          func = value => factor * value;
-        }
-      }
+      let func = (value => conversion2(conversion(value, _config), _config));
       func.indirect = true;
       return func;
     }
