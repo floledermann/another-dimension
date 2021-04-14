@@ -120,7 +120,7 @@ function Dimension(spec, options) {
   }
   
   options = Object.assign({
-    defaultUnit: config.defaultUnit || "mm"
+    defaultUnit: config.defaultUnit
   }, options);
 
   
