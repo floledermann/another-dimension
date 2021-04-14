@@ -72,6 +72,12 @@ describe("Dimension", () => {
       assert.equal( dim1.unit, "m");
     });
 
+    it("Uses value specified as a plain object, with default unit", () => {
+      let dim1 = Dimension({value: 1});
+      assert.equal( dim1.value, 1);
+      assert.equal( dim1.unit, "mm");
+    });
+
     it("Uses unit specified with plain object over specified defaultUnit", () => {
       let dim1 = Dimension({value: 1, unit: "m"}, "cm");
       assert.equal( dim1.value, 1);
@@ -214,6 +220,23 @@ describe("Dimension", () => {
       }
     });
     
+    it("Get conversion function with freezeConfig", () => {
+      
+      let units = Dimension.getUnits();
+      
+      for (let unit1 of units) {
+        for (let unit2 of units) {
+          
+          let func = Dimension.getConversionFunction(unit1, unit2, {freezeConfig: true});          
+          
+          if (func) {
+            assert(func(1));
+          }
+        }
+      }
+      
+    });
+    
     it("Each conversion is inverse of its reciprocal conversion", () => {
       
       // TODO: this fails for angular conversion of very large lengths (km etc.) - check
@@ -231,17 +254,16 @@ describe("Dimension", () => {
           
           // factor needs to be inverse of reciprocal conversion, 
           // within some tolerance for floating point precision
-          /*
-          if (Math.abs(factor1 - 1/factor2) >= epsilon) {
-            console.log(unit1, unit2);
-            console.log(factor1, 1/factor2);
-          }
-          */
+          
+          //if (Math.abs(factor1 - 1/factor2) >= epsilon) {
+          //  console.log(unit1, unit2);
+          //  console.log(factor1, 1/factor2);
+          //}
+          
           //assert(Math.abs(factor1 - 1/factor2) < epsilon);
         }
       }
     });
-    
 
   });
   
@@ -293,6 +315,14 @@ describe("Dimension", () => {
       Dimension.configure({aliases: { "foo": "mm" }});
       let dim1 = Dimension("1foo");
       assert.equal( dim1.unit, "mm");
+      // reset
+      Dimension.configure({aliases: { "um": "µ", "µm": "µ", "°": "deg"}});
+    });
+    
+    it("Setting options.aliases to null clears aliases", () => {
+      Dimension.configure({aliases: null});
+      let dim1 = Dimension.unAlias("°");
+      assert.equal( dim1, "°");
       // reset
       Dimension.configure({aliases: { "um": "µ", "µm": "µ", "°": "deg"}});
     });
@@ -385,6 +415,27 @@ describe("Dimension", () => {
     
   });
   
+  describe("Utilities", () => {
+    
+    it("parseDimensionString() with unit", () => {
+      let res = Dimension.parseDimensionString("-100.0foo");
+      assert.equal( res.value, -100);
+      assert.equal( res.unit, "foo");
+    });
+
+    it("parseDimensionString() with number", () => {
+      let res = Dimension.parseDimensionString("-100.0");
+      assert.equal( res.value, -100);
+      assert.equal( res.unit, "mm");
+    });
+
+    it("parseDimensionString() with invalid value", () => {
+      let res = Dimension.parseDimensionString("bar-10a0.0foo");
+      assert.strictEqual( res, null);
+    });
+
+  });
+  
   describe("Bundling", () => {
     
     it("Import as ES6 module using import() function", () => {
@@ -396,7 +447,7 @@ describe("Dimension", () => {
     });
     
   });
-  
+
 });
 
 after(function(){
