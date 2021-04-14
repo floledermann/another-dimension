@@ -233,13 +233,10 @@ Dimension.addConversion = function(fromUnit, toUnit, factorOrFunction) {
 
 Dimension.getConversionFunction = function(fromUnit, toUnit, options) {
 
-  let _config;
+  let _config = config;
   
   if (options && options.freezeConfig) {
     _config = Object.assign({}, config);
-  }
-  else {
-    _config = config;
   }
   
   fromUnit = Dimension.unAlias(fromUnit);
