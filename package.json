@@ -6,7 +6,8 @@
   "exports": "./another-dimension.js",
   "scripts": {
     "test": "mocha test.js test.mjs",
-    "debug-test": "mocha --inspect-brk test.js test.mjs"
+    "test-debug": "mocha --inspect-brk test.js test.mjs",
+    "coverage": "c8 npm test"
   },
   "repository": {
     "type": "git",
