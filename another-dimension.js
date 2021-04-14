@@ -1,5 +1,6 @@
 // UMD header
-(function (root, factory) {     
+(function (root, factory) { 
+/* c8 ignore start */
   // AMD
   if (typeof define === 'function' && define.amd) { 
     define([],factory);
@@ -16,6 +17,7 @@
     }
     root[globalName] = factory();
   }
+/* c8 ignore stop */
 }(this, function () {
   
 // start library code 
