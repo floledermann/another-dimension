@@ -9,6 +9,7 @@ Why another unit conversion library?
 - **Support for physical screen pixels** taking into account the (configurable) pixel density.
 - Global **configuration of *pixel density* and *viewing distance* for accurate conversion from/to physical screen pixels and angular length units**, as often needed for accurate reproduction of perceptual experiments and user studies.
 - **Modern-style, function-based, highly configurable** implementation.
+- **[100% test coverage](#test-coverage-report)**.
 
 **`another-dimension`** was created as part of the [stimsrv](https://github.com/floledermann/stimsrv) project to support the accurate specification of dimensions for screen-based psychological experiments.
 
@@ -111,7 +112,7 @@ console.log(dim.toString("mm")); // -> 25.4mm
 </script>
 ```
 
-<small>*Note: `another-dimension` works out of the box like this for prototyping in modern browsers. For compatibility with older browsers and optimized delivery consider compiling your project code, including this library, using [Babel](https://babeljs.io/) or similar tools.*</small>
+*Note: `another-dimension` works out of the box like this for prototyping in modern browsers. For compatibility with older browsers and optimized delivery consider compiling your project code, including this library, using [Babel](https://babeljs.io/) or similar tools.*
 
 
 *********************************************************************
@@ -458,6 +459,13 @@ The list of built-in units is deliberately kept short. New units can be added qu
 
 *********************************************************************
 
+## Test coverage report
+
+----------------------|---------|----------|---------|---------
+File                  | % Stmts | % Branch | % Funcs | % Lines 
+----------------------|---------|----------|---------|---------
+All files             |     100 |      100 |     100 |     100 
+----------------------|---------|----------|---------|---------
 
 ## Credits
 
