@@ -461,11 +461,10 @@ The list of built-in units is deliberately kept short. New units can be added qu
 
 ## Test coverage report
 
-----------------------|---------|----------|---------|---------
 File                  | % Stmts | % Branch | % Funcs | % Lines 
 ----------------------|---------|----------|---------|---------
-All files             |     100 |      100 |     100 |     100 
-----------------------|---------|----------|---------|---------
+another-dimension.js  |     100 |      100 |     100 |     100 
+
 
 ## Credits
 
